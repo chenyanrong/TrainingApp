@@ -1,0 +1,94 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+    defaultConfig {
+        applicationId "com.tonychen.trainingapp"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfigs {
+            release {
+                keyAlias 'release'
+                keyPassword 'CHEN@620164'
+                storeFile file('tonychen_release')
+                storePassword 'CHEN@620164'
+            }
+            debug {
+            }
+        }
+        buildTypes {
+            release {
+                minifyEnabled true// 混淆
+                zipAlignEnabled true// Zipalign优化
+                shrinkResources true // 移除无用的resource文件
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.release
+            }
+            debug {
+                minifyEnabled false// 混淆
+                zipAlignEnabled false// Zipalign优化
+                shrinkResources false // 移除无用的resource文件
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                signingConfig signingConfigs.debug
+            }
+        }
+
+        ndk {
+// 设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+
+    // 自定义输出配置
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName = "aios_ui_${variant.buildType.name}_${variant.versionName}.apk"
+                if (variant.buildType.name.equals('debug')){
+                    output.outputFile = new File("E:\\workspace\\trainingapp\\debugapk", fileName)
+                } else {
+                    output.outputFile = new File("E:\\workspace\\trainingapp\\releaseapk", fileName)
+                }
+            }
+        }
+    }
+}
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile project(':tonylib')
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:design:26.+'
+    testCompile 'junit:junit:4.12'
+
+//    日志输出
+    compile 'com.orhanobut:logger:2.1.1'
+
+//    异常上报
+    compile 'com.tencent.bugly:crashreport:latest.release'
+    // 其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.1.5
+    compile 'com.tencent.bugly:nativecrashreport:latest.release'
+    // 其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
+
+//    内存泄漏检测
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+//    循环列表
+    compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
+}
