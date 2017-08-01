@@ -13,7 +13,7 @@ import com.tonychen.trainingapp.presenter.InitBusinessHelper;
 public class DemoApplication extends Application {
     private static final String TAG = DemoApplication.class.getSimpleName();
 
-    public static Application getmInstance() {
+    public static Application getInstance() {
         return mInstance;
     }
 

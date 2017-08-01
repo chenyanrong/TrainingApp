@@ -3,9 +3,8 @@
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_tonychen_trainingapp_MainActivity_stringFromJNI(
-        JNIEnv *env,
-        jobject /* this */) {
+Java_com_tonychen_trainingapp_view_MainActivity_stringFromJNI(JNIEnv *env, jobject instance) {
+
     std::string hello = "Hello from C++";
     return env->NewStringUTF(hello.c_str());
 }

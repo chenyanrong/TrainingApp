@@ -3,7 +3,6 @@ package com.tonychen.trainingapp.presenter;
 import android.app.Application;
 
 import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.DiskLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.LogcatLogStrategy;
 import com.orhanobut.logger.Logger;
@@ -44,10 +43,10 @@ public final class InitBusinessHelper {
      * 应用在初始化阶段没必要再主线程的任务都应放置在此方法中,该方法将在子线程中执行
      */
     private void runInSubThread() {
-        if (LeakCanary.isInAnalyzerProcess(DemoApplication.getmInstance())) {
+        if (LeakCanary.isInAnalyzerProcess(DemoApplication.getInstance())) {
             return;
         }
-        LeakCanary.install(DemoApplication.getmInstance());
+        LeakCanary.install(DemoApplication.getInstance());
     }
 
     public void initInMainThread(Application app) {

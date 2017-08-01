@@ -4,6 +4,6 @@
     android:layout_width="match_parent"
     android:background="@mipmap/bg_splash"
     android:layout_height="match_parent"
-    tools:context="com.tonychen.trainingapp.SplashActivity">
+    tools:context="com.tonychen.trainingapp.view.SplashActivity">
 
 </android.support.constraint.ConstraintLayout>

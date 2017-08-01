@@ -17,5 +17,5 @@ public class Attribute {
     /**
      * 闪屏页内容展示多久才展示主内容页
      */
-    public static final int time_showsplash = 3000;
+    public static final int time_showsplash = 0;
 }
