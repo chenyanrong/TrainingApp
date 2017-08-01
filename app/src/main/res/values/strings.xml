@@ -2,4 +2,6 @@
     <string name="app_name">TrainingApp</string>
     <string name="action_settings">Settings</string>
     <string name="action_share">Share</string>
+    <string name="navigation_drawer_open">开</string>
+    <string name="navigation_drawer_close">关</string>
 </resources>
