@@ -1,5 +1,8 @@
 package com.tonychen.trainingapp.view;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,6 +15,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,6 +54,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void fetchData() {
         mData = new ArrayList<>();
+        PackageManager packageManager = getPackageManager();
+        Intent intent = new Intent();
+        intent.setAction("com.tonychen.action.demo");
+        intent.addCategory("com.tonychen.category.trunk");
+        List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, PackageManager.MATCH_ALL);
+        for (ResolveInfo resolveinfo : resolveInfos) {
+            mData.add(
+                    new ItemMainActBean(
+                            resolveinfo.activityInfo.name,
+                            resolveinfo.activityInfo.nonLocalizedLabel.toString(),
+                            getResources().getString(resolveinfo.activityInfo.descriptionRes),
+                            resolveinfo.priority
+                    )
+            );
+
+        }
     }
 
     private void initView() {
@@ -106,10 +126,10 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerViewContainer.addItemDecoration(dividerItemDecoration);
 
         MainActAdapter mainActAdapter = new MainActAdapter(mData);
-//        mainActAdapter.setOnItemonClickListener(new MainActAdapter.OnItemonClickListener() {
-//            @Override
-//            public void onItemClick(View view, int postion) {
-//                Log.e(TAG, "onItemClick: postion" + postion);
+        mainActAdapter.setOnItemonClickListener(new MainActAdapter.OnItemonClickListener() {
+            @Override
+            public void onItemClick(View view, int postion) {
+                Log.e(TAG, "onItemClick: postion" + postion);
 //                try {
 //                    mFloatView = null;
 //                    Class<?> clazz = Class.forName(mData.get(postion).getClazzName());
@@ -130,8 +150,15 @@ public class MainActivity extends AppCompatActivity {
 //                    e.printStackTrace();
 //                    Log.e(TAG, "反射报错了:" + e.getMessage());
 //                }
-//            }
-//        });
+                try {
+                    startActivity(
+                            new Intent(MainActivity.this, Class.forName(mData.get(postion).getClazzName()))
+                    );
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         mRecyclerViewContainer.setAdapter(mainActAdapter);
 
     }

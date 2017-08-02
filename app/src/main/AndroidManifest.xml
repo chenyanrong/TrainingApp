@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tonychen.trainingapp">
+          package="com.tonychen.trainingapp">
 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
 
     <application
         android:name=".DemoApplication"
@@ -25,28 +25,33 @@
             android:noHistory="true"
             android:theme="@style/SplashStyle">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".view.MainActivity"
-            android:label="@string/app_name" />
-        <activity android:name=".view.DemoTestActivity" />
+            android:label="@string/app_name"/>
+        <activity android:name=".view.DemoTestActivity"/>
         <!-- 一级目录 start -->
         <activity
             android:name=".view.FloatWindowActivity"
             android:description="@string/FloatWindowActivity"
             android:label="悬浮窗">
             <intent-filter>
-                <action android:name="com.tonychen.action.demo" />
-                <category android:name="com.tonychen.category.trunk" />
+                <action android:name="com.tonychen.action.demo"/>
+                <category android:name="com.tonychen.category.trunk"/>
             </intent-filter>
+
+            <meta-data
+                android:name="des"
+                android:resource="@string/FloatWindowActivity"/>
+            <meta-data
+                android:name="priority"
+                android:value="1"/>
         </activity>
         <!-- 一级目录 end -->
-
-
 
 
         <!-- 子项目 start -->
@@ -54,12 +59,17 @@
 
         <activity android:name=".view.itemact.DemoItemActivity">
             <intent-filter>
-                <action android:name="com.tonychen.action.demo" />
-                <category android:name="com.tonychen.category.branch" />
+                <action android:name="com.tonychen.action.demo"/>
+                <category android:name="com.tonychen.category.branch"/>
             </intent-filter>
         </activity>
 
         <!-- 子项目 end -->
+
+        <service
+            android:name=".services.FloatContralService"
+            android:enabled="true"
+            android:exported="false"/>
 
 
     </application>

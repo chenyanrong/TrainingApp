@@ -7,6 +7,7 @@ package com.tonychen.trainingapp.model;
 public class ItemMainActBean {
     private String clazzName;
     private String title;
+    private int priority;
 
     public String getClazzName() {
         return clazzName;
@@ -20,10 +21,19 @@ public class ItemMainActBean {
         return intro;
     }
 
+    public int getPriority() {
+        return priority;
+    }
+
     public ItemMainActBean(String clazzName, String title, String intro) {
+        this(clazzName, title, intro, 0);
+    }
+
+    public ItemMainActBean(String clazzName, String title, String intro, int priority) {
         this.clazzName = clazzName;
         this.title = title;
         this.intro = intro;
+        this.priority = priority;
     }
 
     private String intro;
