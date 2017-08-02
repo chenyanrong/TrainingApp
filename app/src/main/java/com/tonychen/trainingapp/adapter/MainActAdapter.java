@@ -1,23 +1,23 @@
-package com.tonychen.floatwindow.adapters;
+package com.tonychen.trainingapp.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.tonychen.floatwindow.R;
-import com.tonychen.floatwindow.model.ItemMainActBean;
+import com.tonychen.trainingapp.R;
+import com.tonychen.trainingapp.model.ItemMainActBean;
 
 import java.util.List;
+
 
 /**
  * Created by chenc on 2017/8/1.
  */
 
 public class MainActAdapter extends RecyclerView.Adapter<MainActAdapter.ItemMainViewHolder> {
-
-
     private List<ItemMainActBean> mData;
 
     public MainActAdapter(List<ItemMainActBean> mData) {
@@ -29,15 +29,15 @@ public class MainActAdapter extends RecyclerView.Adapter<MainActAdapter.ItemMain
 
     @Override
     public ItemMainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemMainViewHolder viewHolder = new ItemMainViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_act_main, parent,false));
+        ItemMainViewHolder viewHolder = new ItemMainViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_act_main, parent, false));
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ItemMainViewHolder holder, final int position) {
-        holder.tvTitle.setText(position+": "+mData.get(position).getTitle());
+        holder.tvTitle.setText(position + ": " + mData.get(position).getTitle());
         holder.tvIntro.setText(mData.get(position).getIntro());
-        holder.rlContainer.setOnClickListener(new View.OnClickListener() {
+        holder.llContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (onItemonClickListener != null) {
@@ -65,13 +65,13 @@ public class MainActAdapter extends RecyclerView.Adapter<MainActAdapter.ItemMain
     static class ItemMainViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle;
         TextView tvIntro;
-        ViewGroup rlContainer;
+        LinearLayout llContainer;
 
         public ItemMainViewHolder(View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tv_title);
-            tvIntro = itemView.findViewById(R.id.tv_intro);
-            rlContainer = itemView.findViewById(R.id.rl_container);
+            tvTitle = (TextView) itemView.findViewById(R.id.tv_title);
+            tvIntro = (TextView) itemView.findViewById(R.id.tv_intro);
+            llContainer = (LinearLayout) itemView.findViewById(R.id.ll_container);
         }
     }
 }

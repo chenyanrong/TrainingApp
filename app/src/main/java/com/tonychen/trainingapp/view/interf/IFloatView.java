@@ -1,4 +1,4 @@
-package com.tonychen.floatwindow.views.interf;
+package com.tonychen.trainingapp.view.interf;
 
 import android.view.View;
 

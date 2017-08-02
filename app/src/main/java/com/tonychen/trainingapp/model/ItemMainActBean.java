@@ -1,4 +1,4 @@
-package com.tonychen.floatwindow.model;
+package com.tonychen.trainingapp.model;
 
 /**
  * Created by chenc on 2017/8/1.

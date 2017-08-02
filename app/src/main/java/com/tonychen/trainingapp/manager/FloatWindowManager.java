@@ -1,4 +1,4 @@
-package com.tonychen.floatwindow.managers;
+package com.tonychen.trainingapp.manager;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,7 +6,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.tonychen.floatwindow.DemoApplication;
+import com.tonychen.trainingapp.DemoApplication;
 
 /**
  * Created by chenc on 2017/7/31.
@@ -19,7 +19,7 @@ public final class FloatWindowManager {
 
     private FloatWindowManager() {
         Log.d(TAG, "FloatWindowManager: instance create");
-        mWindowManager = (WindowManager) DemoApplication.getApplication().getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        mWindowManager = (WindowManager) DemoApplication.getInstance().getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
         mLayoutParams = new WindowManager.LayoutParams();
         // 类型
         mLayoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;

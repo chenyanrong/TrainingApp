@@ -1,4 +1,4 @@
-package com.tonychen.floatwindow.managers;
+package com.tonychen.trainingapp.manager;
 
 import android.view.View;
 
@@ -7,6 +7,6 @@ import android.view.View;
  */
 
 public interface IFloatContral {
-    void show(View view );
+    void show(View view);
 //    void hide(View view );
 }

@@ -1,4 +1,4 @@
-package com.tonychen.floatwindow.views;
+package com.tonychen.trainingapp.view.customviews;
 
 import android.content.Context;
 import android.os.Build;
@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.tonychen.floatwindow.managers.FloatWindowManager;
-import com.tonychen.floatwindow.R;
-import com.tonychen.floatwindow.utils.UIUtils;
-import com.tonychen.floatwindow.views.interf.IFloatView;
+import com.tonychen.tonylib.utils.UIUtil;
+import com.tonychen.trainingapp.R;
+import com.tonychen.trainingapp.manager.FloatWindowManager;
+import com.tonychen.trainingapp.view.interf.IFloatView;
 
 /**
  * Created by TonyChen on 2017/07/31;
@@ -36,8 +36,8 @@ public abstract class BaseFloatView implements IFloatView {
         }
         View closeView = new View(mContext);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                UIUtils.dip2px(mContext, 32),
-                UIUtils.dip2px(mContext, 32)
+                UIUtil.dip2px(mContext, 32),
+                UIUtil.dip2px(mContext, 32)
         );
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             closeView.setBackground(mContext.getResources().getDrawable(R.drawable.selector_close));

@@ -1,10 +1,10 @@
-package com.tonychen.floatwindow.views;
+package com.tonychen.trainingapp.view.customviews;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.tonychen.floatwindow.R;
+import com.tonychen.trainingapp.R;
 
 /**
  * Created by TonyChen on 2017/07/31;

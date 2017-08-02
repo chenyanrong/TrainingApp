@@ -4,4 +4,9 @@
     <string name="action_share">Share</string>
     <string name="navigation_drawer_open">开</string>
     <string name="navigation_drawer_close">关</string>
+    <string name="normal">NORMAL</string>
+
+
+    <!--Activity 描述-->
+    <string name="FloatWindowActivity">所有浮窗都应该放到这</string>
 </resources>

@@ -7,7 +7,7 @@ import com.tonychen.trainingapp.R;
 import com.tonychen.trainingapp.view.customviews.SimpleTitleView;
 import com.tonychen.trainingapp.view.interf.BaseTitleActivity;
 
-public class Main2Activity extends BaseTitleActivity{
+public class DemoTestActivity extends BaseTitleActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
