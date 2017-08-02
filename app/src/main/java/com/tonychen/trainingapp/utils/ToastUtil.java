@@ -13,7 +13,7 @@ import com.tonychen.trainingapp.DemoApplication;
 
 public class ToastUtil {
     private static Toast toast = null;
-    public static void showTextToast( String msg) {
+    public static void showText(String msg) {
         if (toast == null) {
             toast = Toast.makeText(DemoApplication.getInstance(), msg, Toast.LENGTH_SHORT);
         } else {

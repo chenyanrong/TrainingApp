@@ -2,6 +2,7 @@ package com.tonychen.tonylib.utils;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 
 /**
  * Created by TonyChen on 2017/08/01;
@@ -11,59 +12,75 @@ import android.util.DisplayMetrics;
  */
 
 public class UIUtil {
-    private UIUtil(){}
+    private UIUtil() {
+    }
 
     /**
-     * 获取当前设备的显示器的显示区矩阵信息
+     * 通过系统属性设置获取actionbar的高度
+     *
      * @param context
      * @return
      */
-    public static DisplayMetrics getDisplayMetrics(Context context)
-    {
+    public static int getActionBarHeight(Context context) {
+        int actionBarHeight = 0;
+        TypedValue tv = new TypedValue();
+        if (context.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
+        }
+        return actionBarHeight;
+    }
+
+    /**
+     * 获取当前设备的显示器的显示区矩阵信息
+     *
+     * @param context
+     * @return
+     */
+    public static DisplayMetrics getDisplayMetrics(Context context) {
         return context.getResources().getDisplayMetrics();
     }
 
     /**
      * 获取当前设备的显示器的像素密度与标准屏幕(320*480)的比值
+     *
      * @param context
      * @return
      */
-    public static float getDisplayDensity(Context context)
-    {
+    public static float getDisplayDensity(Context context) {
         return context.getResources().getDisplayMetrics().density;
     }
 
 
     /**
      * 获取当前设备显示器的宽度的像素值
+     *
      * @param context
      * @return
      */
-    public static int getScreenWidth(Context context)
-    {
+    public static int getScreenWidth(Context context) {
         DisplayMetrics metrics = getDisplayMetrics(context);
         return metrics.widthPixels;
     }
 
     /**
      * 获取当前设备显示器的高度的像素值
+     *
      * @param context
      * @return
      */
-    public static int getScreenHeight(Context context)
-    {
+    public static int getScreenHeight(Context context) {
         DisplayMetrics metrics = getDisplayMetrics(context);
         return metrics.heightPixels;
     }
 
     /**
      * dip转换成px
+     *
      * @param context
      * @param dip
      * @return
      */
-    public static int dip2px(Context context, int dip)
-    {
+    public static int dip2px(Context context, int dip) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         float density = metrics.density;
         return (int) (dip * density + 0.5f);
@@ -71,12 +88,12 @@ public class UIUtil {
 
     /**
      * px转换成dip
+     *
      * @param context
      * @param px
      * @return
      */
-    public static int px2dip(Context context, int px)
-    {
+    public static int px2dip(Context context, int px) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         float density = metrics.density;
         return (int) (px / density + 0.5f);
@@ -84,25 +101,27 @@ public class UIUtil {
 
     /**
      * px转成sp，主要用于字体
+     *
      * @param context
      * @param px
      * @return
      */
-    public static int px2sp(Context context, int px){
+    public static int px2sp(Context context, int px) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         float scaledDensity = metrics.scaledDensity;
-        return (int)(px/scaledDensity +0.5f);
+        return (int) (px / scaledDensity + 0.5f);
     }
 
     /**
      * sp转换成px
+     *
      * @param context
      * @param sp
      * @return
      */
-    public static int sp2px(Context context, int sp){
+    public static int sp2px(Context context, int sp) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         float scaledDensity = metrics.scaledDensity;
-        return (int)(sp * scaledDensity +0.5f);
+        return (int) (sp * scaledDensity + 0.5f);
     }
 }

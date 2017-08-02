@@ -1,5 +1,6 @@
 package com.tonychen.trainingapp.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -58,13 +59,25 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.nav_camera:ToastUtil.showTextToast("click nav_camera") ;return true;
-                    case R.id.nav_gallery:ToastUtil.showTextToast("click nav_gallery");return true;
-                    case R.id.nav_manage:ToastUtil.showTextToast("click nav_manage");return true;
-                    case R.id.nav_send:ToastUtil.showTextToast("click nav_send");return true;
-                    case R.id.nav_share:ToastUtil.showTextToast("click nav_share");return true;
-                    case R.id.nav_slideshow:ToastUtil.showTextToast("click nav_slideshow");return true;
+                switch (item.getItemId()) {
+                    case R.id.nav_camera:
+                        ToastUtil.showText("click nav_camera");
+                        return true;
+                    case R.id.nav_gallery:
+                        ToastUtil.showText("click nav_gallery");
+                        return true;
+                    case R.id.nav_manage:
+                        ToastUtil.showText("click nav_manage");
+                        return true;
+                    case R.id.nav_send:
+                        ToastUtil.showText("click nav_send");
+                        return true;
+                    case R.id.nav_share:
+                        ToastUtil.showText("click nav_share");
+                        return true;
+                    case R.id.nav_slideshow:
+                        ToastUtil.showText("click nav_slideshow");
+                        return true;
                 }
                 return false;
             }
@@ -73,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 //        // Example of a call to a native method
 //        TextView tv = (TextView) findViewById(R.id.sample_text);
 //        tv.setText(stringFromJNI());
+        startActivity(new Intent(this, Main2Activity.class));
     }
 
     /**
@@ -114,10 +128,10 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            ToastUtil.showTextToast("click menu setting");
+            ToastUtil.showText("click menu setting");
             return true;
         } else if (id == R.id.action_share) {
-            ToastUtil.showTextToast("click menu share");
+            ToastUtil.showText("click menu share");
             return true;
         }
 
