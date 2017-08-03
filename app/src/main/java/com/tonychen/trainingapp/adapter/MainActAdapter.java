@@ -35,7 +35,7 @@ public class MainActAdapter extends RecyclerView.Adapter<MainActAdapter.ItemMain
 
     @Override
     public void onBindViewHolder(ItemMainViewHolder holder, final int position) {
-        holder.tvTitle.setText(position + ": " + mData.get(position).getTitle());
+        holder.tvTitle.setText(position + " : " + mData.get(position).getTitle());
         holder.tvIntro.setText(mData.get(position).getIntro());
         holder.llContainer.setOnClickListener(new View.OnClickListener() {
             @Override

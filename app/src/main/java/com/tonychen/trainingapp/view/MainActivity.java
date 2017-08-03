@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.orhanobut.logger.Logger;
 import com.tonychen.trainingapp.R;
 import com.tonychen.trainingapp.adapter.MainActAdapter;
 import com.tonychen.trainingapp.model.ItemMainActBean;
@@ -46,8 +47,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fetchData();
-        initView();
     }
 
     @Override
@@ -58,7 +57,8 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void fetchData() {
+    @Override
+    protected void fetchData() {
         mData = new ArrayList<>();
         PackageManager packageManager = getPackageManager();
         Intent intent = new Intent();
@@ -77,7 +77,8 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void initView() {
+    @Override
+    protected void initView() {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);// 给左上角图标的左边加上一个返回的图标
@@ -134,39 +135,20 @@ public class MainActivity extends BaseActivity {
         mainActAdapter.setOnItemonClickListener(new MainActAdapter.OnItemonClickListener() {
             @Override
             public void onItemClick(View view, int postion) {
-                Log.e(TAG, "onItemClick: postion" + postion);
-//                try {
-//                    mFloatView = null;
-//                    Class<?> clazz = Class.forName(mData.get(postion).getClazzName());
-//                    Constructor<?> declaredConstructor = clazz.getDeclaredConstructor(Context.class);
-//                    Object floatViewInstance = declaredConstructor.newInstance(MainActivity.this);
-//
-//                    Class<BaseFloatView> baseFloatViewClass = BaseFloatView.class;
-//                    Method onCreateView = baseFloatViewClass.getDeclaredMethod("createView");
-//                    onCreateView.setAccessible(true);
-//                    mFloatView = (View) onCreateView.invoke(floatViewInstance);
-//
-//                    if (mFloatView == null) {
-//                        Log.e(TAG, "mFloatView==null");
-//                        return;
-//                    }
-//                    mFloatContral.show(mFloatView);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    Log.e(TAG, "反射报错了:" + e.getMessage());
-//                }
+                Logger.i("将打开的Activity = " + mData.get(postion).getClazzName());
                 try {
-                    startActivity(
-                            new Intent(MainActivity.this, Class.forName(mData.get(postion).getClazzName()))
-                    );
+                    Intent startActIntent = new Intent(MainActivity.this, Class.forName(mData.get(postion).getClazzName()));
+                    startActIntent.putExtra("KEY_CATEGORY","com.tonychen.category.floatwindow");
+                    startActivity(startActIntent);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
             }
         });
         mRecyclerViewContainer.setAdapter(mainActAdapter);
-
     }
+
+    public static final String KEY_CATEGORY = "KEY_CATEGORY";
 
     /**
      * 通过反射，设置menu显示icon

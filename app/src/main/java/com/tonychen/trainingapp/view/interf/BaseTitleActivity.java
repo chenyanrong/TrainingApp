@@ -1,5 +1,7 @@
 package com.tonychen.trainingapp.view.interf;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.tonychen.trainingapp.R;
@@ -15,8 +17,10 @@ import com.tonychen.trainingapp.view.customviews.SimpleTitleView;
 public class BaseTitleActivity extends BaseActivity {
     @Override
     protected View setTitleView() {
-        View titleView = new SimpleTitleView(this);
+        SimpleTitleView titleView = new SimpleTitleView(this);
+        titleView.setTitle(this.getClass().getSimpleName());
         titleView.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         return titleView;
     }
+
 }

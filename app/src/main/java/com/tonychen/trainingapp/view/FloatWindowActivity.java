@@ -1,7 +1,8 @@
 package com.tonychen.trainingapp.view;
 
-import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,42 +11,41 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
 import com.tonychen.trainingapp.R;
 import com.tonychen.trainingapp.adapter.MainActAdapter;
-import com.tonychen.trainingapp.manager.IFloatContral;
 import com.tonychen.trainingapp.model.ItemMainActBean;
-import com.tonychen.trainingapp.services.FloatContralService;
-import com.tonychen.trainingapp.view.customviews.BaseFloatView;
-import com.tonychen.trainingapp.view.customviews.NormalView;
+import com.tonychen.trainingapp.utils.ToastUtil;
 import com.tonychen.trainingapp.view.interf.BaseTitleActivity;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FloatWindowActivity extends BaseTitleActivity {
     private static final String TAG = FloatWindowActivity.class.getSimpleName();
 
-    private IFloatContral mFloatContral;
-    private View mFloatView;
-    private RecyclerView mRecyclerViewContainer;
 
     private List<ItemMainActBean> mData;
 
     private static final int CODE_OVERLAY_PERMISSION = 10;
+    private String category = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mFloatContral = FloatContralService.getFloatContralInstance();
+        setContentView(R.layout.activity_float_window);
+        category = getIntent().getStringExtra(MainActivity.KEY_CATEGORY);
+        Logger.d("获取到的category = " + category);
+    }
 
+
+    @Override
+    protected void beforeSetContentView() {
+        super.beforeSetContentView();
         if (Build.VERSION.SDK_INT >= 23) {
             if (!Settings.canDrawOverlays(this)) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
@@ -53,41 +53,37 @@ public class FloatWindowActivity extends BaseTitleActivity {
                 startActivityForResult(intent, CODE_OVERLAY_PERMISSION);
             }
         }
-        fetchData();
-        initView();
-
     }
 
-    private void fetchData() {
+    @Override
+    protected void fetchData() {
         mData = new ArrayList<>();
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
-        mData.add(new ItemMainActBean(NormalView.class.getName(), NormalView.class.getSimpleName(), "显示一个黑屏的界面,测试~~~~"));
+        PackageManager packageManager = getPackageManager();
+        Intent intent = new Intent();
+        intent.setAction("com.tonychen.action.demo");
+        intent.addCategory("com.tonychen.category.branch");
+        if (!TextUtils.isEmpty(category)) {
+            intent.addCategory(category);
+        }
+        List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, PackageManager.GET_RESOLVED_FILTER);
+        if (null == resolveInfos || resolveInfos.size() == 0) {
+            Logger.e("查询不到任何有效的activity!");
+        }
+        for (ResolveInfo resolveinfo : resolveInfos) {
+            mData.add(
+                    new ItemMainActBean(
+                            resolveinfo.activityInfo.name,
+                            resolveinfo.activityInfo.nonLocalizedLabel.toString(),
+                            getResources().getString(resolveinfo.activityInfo.descriptionRes),
+                            resolveinfo.priority
+                    )
+            );
+        }
     }
 
-    private void initView() {
-        mRecyclerViewContainer = (RecyclerView) findViewById(R.id.rcv_container);
+    @Override
+    protected void initView() {
+        RecyclerView mRecyclerViewContainer = (RecyclerView) findViewById(R.id.rcv_container);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerViewContainer.setLayoutManager(linearLayoutManager);
@@ -101,26 +97,12 @@ public class FloatWindowActivity extends BaseTitleActivity {
         mainActAdapter.setOnItemonClickListener(new MainActAdapter.OnItemonClickListener() {
             @Override
             public void onItemClick(View view, int postion) {
-                Log.e(TAG, "onItemClick: postion" + postion);
+                Logger.e("onItemClick: postion" + postion + " className = " + mData.get(postion).getClazzName());
                 try {
-                    mFloatView = null;
-                    Class<?> clazz = Class.forName(mData.get(postion).getClazzName());
-                    Constructor<?> declaredConstructor = clazz.getDeclaredConstructor(Context.class);
-                    Object floatViewInstance = declaredConstructor.newInstance(FloatWindowActivity.this);
-
-                    Class<BaseFloatView> baseFloatViewClass = BaseFloatView.class;
-                    Method onCreateView = baseFloatViewClass.getDeclaredMethod("createView");
-                    onCreateView.setAccessible(true);
-                    mFloatView = (View) onCreateView.invoke(floatViewInstance);
-
-                    if (mFloatView == null) {
-                        Log.e(TAG, "mFloatView==null");
-                        return;
-                    }
-                    mFloatContral.show(mFloatView);
-                } catch (Exception e) {
+                    Intent startActIntent = new Intent(FloatWindowActivity.this, Class.forName(mData.get(postion).getClazzName()));
+                    startActivity(startActIntent);
+                } catch (ClassNotFoundException e) {
                     e.printStackTrace();
-                    Log.e(TAG, "反射报错了:" + e.getMessage());
                 }
             }
         });
@@ -132,19 +114,11 @@ public class FloatWindowActivity extends BaseTitleActivity {
         if (requestCode == CODE_OVERLAY_PERMISSION) {
             if (Build.VERSION.SDK_INT >= 23) {
                 if (!Settings.canDrawOverlays(this)) {
-                    Toast.makeText(this, "not granted", Toast.LENGTH_SHORT);
+                    ToastUtil.showText("not granted");
+                    FloatWindowActivity.this.finish();
+
                 }
             }
         }
-    }
-
-    /**
-     * 普通的界面
-     *
-     * @param view
-     */
-    public void normal(View view) {
-        mFloatView = new NormalView(this).createView();
-        mFloatContral.show(mFloatView);
     }
 }

@@ -4,12 +4,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
@@ -46,6 +44,14 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    protected void fetchData() {
+        //// TODO: 初始化view,该方法在sencontentview后initView()前会被调用
+    }
+
+    protected void initView() {
+        //// TODO: 初始化view,该方法在sencontentview后会被调用
+    }
+
     protected void afterSetContentView() {
         ViewGroup contentView = getContentView();
 //        contentView.getChildAt(0).setFitsSystemWindows(true);
@@ -54,6 +60,9 @@ public class BaseActivity extends AppCompatActivity {
         if (isKeepScreenOn()) {
             contentView.getChildAt(0).setKeepScreenOn(true);
         }
+
+        fetchData();
+        initView();
     }
 
     protected ViewGroup getContentView() {
@@ -63,7 +72,6 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mTitleView = setTitleView();
         Logger.i(this.getClass().getSimpleName() + "--->onCreate");
     }
@@ -100,6 +108,7 @@ public class BaseActivity extends AppCompatActivity {
 
     private void initContentView(View advanceContentView) {
         LinearLayout finallyContentView = new LinearLayout(this);
+        finallyContentView.setOrientation(LinearLayout.VERTICAL);
         finallyContentView.setFitsSystemWindows(true);
         finallyContentView.addView(mTitleView,
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, UIUtil.getActionBarHeight(this))
