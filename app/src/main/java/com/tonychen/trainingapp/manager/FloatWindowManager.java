@@ -24,10 +24,9 @@ public final class FloatWindowManager {
         // 类型
         mLayoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ERROR;
         // 设置flag
-        int flags = WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN; // 全屏并遮盖系统状态栏
         // | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         // 如果设置了WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE，弹出的View收不到Back键的事件
-        mLayoutParams.flags = flags;
+        mLayoutParams.flags = WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
 
         // 不设置这个弹出框的透明遮罩显示为黑色
 //        mLayoutParams.format = PixelFormat.TRANSLUCENT;
@@ -40,7 +39,7 @@ public final class FloatWindowManager {
         mLayoutParams.gravity = Gravity.CENTER;
     }
 
-    public static final FloatWindowManager getInstance() {
+    public static  FloatWindowManager getInstance() {
         return Inner.mFloatWindowManager;
     }
 

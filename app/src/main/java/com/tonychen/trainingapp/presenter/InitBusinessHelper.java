@@ -50,12 +50,10 @@ public final class InitBusinessHelper {
     }
 
     public void initInMainThread(Application app) {
-        CrashReport.initCrashReport(app, Attribute.BuglyAppID, BuildConfig.DEBUG);
-
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
-                .showThreadInfo(true)  // (Optional) Whether to show thread info or not. Default true
+                .showThreadInfo(false)  // (Optional) Whether to show thread info or not. Default true
                 .methodCount(0)         // (Optional) How many method line to show. Default 2
-                .methodOffset(5)        // (Optional) Hides internal method calls up to offset. Default 5
+                .methodOffset(0)        // (Optional) Hides internal method calls up to offset. Default 5
                 .logStrategy(new LogcatLogStrategy()) // (Optional) Changes the log strategy to print out. Default LogCat
                 .tag("TONYCHEN")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
                 .build();
@@ -67,6 +65,7 @@ public final class InitBusinessHelper {
 //            }
 //        });
 
+        CrashReport.initCrashReport(app, Attribute.BuglyAppID, BuildConfig.DEBUG);
 
         Logger.i("initInMainThread finish");
     }

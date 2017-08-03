@@ -3,12 +3,13 @@ package com.tonychen.trainingapp.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.tonychen.trainingapp.R;
 import com.tonychen.trainingapp.config.Attribute;
 import com.tonychen.trainingapp.manager.HandlerManager;
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends AppCompatActivity {
 
     private Runnable startMainActivityTask = new Runnable() {
         @Override
@@ -21,8 +22,8 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
         HandlerManager.getInstance().getMainHandler().postDelayed(startMainActivityTask, Attribute.time_showsplash);
+        setContentView(R.layout.activity_splash);
     }
 
     @Override

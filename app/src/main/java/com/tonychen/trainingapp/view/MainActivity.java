@@ -3,6 +3,7 @@ package com.tonychen.trainingapp.view;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -19,18 +20,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.tonychen.trainingapp.R;
 import com.tonychen.trainingapp.adapter.MainActAdapter;
 import com.tonychen.trainingapp.model.ItemMainActBean;
 import com.tonychen.trainingapp.utils.ToastUtil;
+import com.tonychen.trainingapp.view.interf.BaseActivity;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     static {
@@ -39,17 +42,20 @@ public class MainActivity extends AppCompatActivity {
 
     private List<ItemMainActBean> mData;
 
-    private DrawerLayout mDrawerLayout;
-    private Toolbar mToolbar;
-    private RecyclerView mRecyclerViewContainer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         fetchData();
         initView();
+    }
+
+    @Override
+    protected void beforeSetContentView() {
+        super.beforeSetContentView();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
     }
 
     private void fetchData() {
@@ -58,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setAction("com.tonychen.action.demo");
         intent.addCategory("com.tonychen.category.trunk");
-        List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, PackageManager.MATCH_ALL);
+        List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, PackageManager.GET_RESOLVED_FILTER);
         for (ResolveInfo resolveinfo : resolveInfos) {
             mData.add(
                     new ItemMainActBean(
@@ -68,19 +74,18 @@ public class MainActivity extends AppCompatActivity {
                             resolveinfo.priority
                     )
             );
-
         }
     }
 
     private void initView() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);// 给左上角图标的左边加上一个返回的图标
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.dl_main);
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.dl_main);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
-        mDrawerLayout.setDrawerListener(toggle);
+        mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
@@ -115,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 //        TextView tv = (TextView) findViewById(R.id.sample_text);
 //        tv.setText(stringFromJNI());
 
-        mRecyclerViewContainer = (RecyclerView) findViewById(R.id.rcv_container);
+        RecyclerView mRecyclerViewContainer = (RecyclerView) findViewById(R.id.rcv_container);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerViewContainer.setLayoutManager(linearLayoutManager);
@@ -166,9 +171,9 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 通过反射，设置menu显示icon
      *
-     * @param view
-     * @param menu
-     * @return
+     * @param view xxx
+     * @param menu xxx
+     * @return xxx
      */
     @Override
     protected boolean onPrepareOptionsPanel(View view, Menu menu) {

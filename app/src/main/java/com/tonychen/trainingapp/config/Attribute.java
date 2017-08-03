@@ -18,4 +18,9 @@ public class Attribute {
      * 闪屏页内容展示多久才展示主内容页
      */
     public static final int time_showsplash = 0;
+
+    /**
+     *  保持应用窗口常亮
+     */
+    public static final boolean isKeepScreenOn = true;
 }

@@ -22,6 +22,17 @@ public class UIUtil {
      * @return
      */
     public static int getActionBarHeight(Context context) {
+//        try {
+//            Class<?> c = Class.forName("com.android.internal.R$dimen");
+//            Object obj = c.newInstance();
+//            Field field = c.getField("status_bar_height");
+//            int x = Integer.parseInt(field.get(obj).toString());
+//            return getResources().getDimensionPixelSize(x);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return 0;
+
         int actionBarHeight = 0;
         TypedValue tv = new TypedValue();
         if (context.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
