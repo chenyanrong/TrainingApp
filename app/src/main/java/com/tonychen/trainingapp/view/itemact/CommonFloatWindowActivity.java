@@ -7,6 +7,7 @@ import com.tonychen.trainingapp.R;
 import com.tonychen.trainingapp.manager.IFloatContral;
 import com.tonychen.trainingapp.services.FloatContralService;
 import com.tonychen.trainingapp.view.customviews.NormalView;
+import com.tonychen.trainingapp.view.customviews.RoundView;
 import com.tonychen.trainingapp.view.interf.BaseTitleActivity;
 
 public class CommonFloatWindowActivity extends BaseTitleActivity {
@@ -27,7 +28,12 @@ public class CommonFloatWindowActivity extends BaseTitleActivity {
 
 
     public void show(View view) {
-        normal();
+        roundRelativeLayout();
+    }
+
+    public void roundRelativeLayout() {
+        mFloatView = new RoundView(this).createView();
+        mFloatContral.show(mFloatView);
     }
 
     public void normal() {

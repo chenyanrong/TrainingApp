@@ -200,8 +200,6 @@
             android:enabled="true"
             android:exported="false"/>
 
-        <activity android:name=".view.UtilsActivity">
-        </activity>
     </application>
 
 </manifest>
