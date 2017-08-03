@@ -9,7 +9,9 @@
 
     <!--Activity 描述-->
     <string name="FloatWindowActivity">所有浮窗都应该放到这</string>
+    <string name="MainActivity">主界面</string>
     <string name="RxJavaActivity">RxJava基础</string>
+    <string name="CustomViewActivity">自定义View</string>
     <string name="KotlinActivity">Kotlin基础</string>
     <string name="JNIActivity">JNI</string>
     <string name="OpenSourceLibActivity">开源项目</string>
@@ -18,4 +20,5 @@
     <string name="AndroidSystemActivity">Android系统机制</string>
     <string name="CommonFloatWindowActivity">普通的浮窗示例</string>
     <string name="DemoItemActivity">测试示例</string>
+    <string name="my_website">https://chenyanrong.github.io/</string>
 </resources>

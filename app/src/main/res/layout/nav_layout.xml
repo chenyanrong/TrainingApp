@@ -16,7 +16,7 @@
         android:layout_gravity="bottom"
         android:layout_marginBottom="56dp"
         android:padding="8dp"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/ic_launcher_round" />
 
     <TextView
         android:layout_width="match_parent"
@@ -31,8 +31,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:autoLink="web"
         android:padding="16dp"
-        android:text="个人简介"
+        android:text="@string/my_website"
         android:textColor="@android:color/white"
         android:textSize="12sp" />
 </FrameLayout>

@@ -32,13 +32,27 @@
         </activity>
         <activity
             android:name=".view.MainActivity"
-            android:label="@string/app_name" />
+            android:label="@string/MainActivity" />
 
         <!-- 一级目录 start -->
         <activity
             android:name=".view.FloatWindowActivity"
             android:description="@string/FloatWindowActivity"
             android:label="悬浮窗">
+            <intent-filter>
+                <action android:name="com.tonychen.action.demo" />
+
+                <category android:name="com.tonychen.category.trunk" />
+            </intent-filter>
+
+            <meta-data
+                android:name="priority"
+                android:value="1" />
+        </activity>
+        <activity
+            android:name=".view.CustomViewActivity"
+            android:description="@string/CustomViewActivity"
+            android:label="自定义View">
             <intent-filter>
                 <action android:name="com.tonychen.action.demo" />
 
@@ -80,7 +94,7 @@
         <activity
             android:name=".view.JNIActivity"
             android:description="@string/JNIActivity"
-            android:label="JNIActivity">
+            android:label="JNI">
             <intent-filter>
                 <action android:name="com.tonychen.action.demo" />
 
@@ -94,7 +108,7 @@
         <activity
             android:name=".view.OpenSourceLibActivity"
             android:description="@string/OpenSourceLibActivity"
-            android:label="OpenSourceLibActivity">
+            android:label="OpenSourceLib">
             <intent-filter>
                 <action android:name="com.tonychen.action.demo" />
 
