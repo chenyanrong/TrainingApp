@@ -1,6 +1,8 @@
 package com.tonychen.trainingapp.view;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Build;
@@ -32,6 +34,8 @@ import com.tonychen.trainingapp.view.interf.BaseActivity;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MainActivity extends BaseActivity {
@@ -66,15 +70,40 @@ public class MainActivity extends BaseActivity {
         intent.addCategory("com.tonychen.category.trunk");
         List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, PackageManager.GET_RESOLVED_FILTER);
         for (ResolveInfo resolveinfo : resolveInfos) {
+            int priority = -1;
+            String category = "";
+            try {
+                ComponentName componentName = new ComponentName(resolveinfo.activityInfo.packageName, resolveinfo.activityInfo.name);
+                ActivityInfo activityInfo = packageManager.getActivityInfo(componentName, PackageManager.GET_META_DATA);
+                priority = activityInfo.metaData.getInt("priority");
+                category = activityInfo.metaData.getString("category");
+                Logger.e("priority = " + priority);
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
             mData.add(
                     new ItemMainActBean(
                             resolveinfo.activityInfo.name,
                             resolveinfo.activityInfo.nonLocalizedLabel.toString(),
                             getResources().getString(resolveinfo.activityInfo.descriptionRes),
-                            resolveinfo.priority
+                            priority, category
                     )
             );
         }
+        // 数据重新排序
+        Collections.sort(mData, new Comparator<ItemMainActBean>() {
+            @Override
+            public int compare(ItemMainActBean o1, ItemMainActBean o2) {
+                if (o1.getPriority() == o2.getPriority()) {
+                    return o1.getClazzName().compareTo(o2.getClazzName());
+                } else if (o1.getPriority() > o2.getPriority()) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        });
+
     }
 
     @Override
@@ -138,7 +167,7 @@ public class MainActivity extends BaseActivity {
                 Logger.i("将打开的Activity = " + mData.get(postion).getClazzName());
                 try {
                     Intent startActIntent = new Intent(MainActivity.this, Class.forName(mData.get(postion).getClazzName()));
-                    startActIntent.putExtra("KEY_CATEGORY","com.tonychen.category.floatwindow");
+                    startActIntent.putExtra("KEY_CATEGORY", mData.get(postion).getCategory());
                     startActivity(startActIntent);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();

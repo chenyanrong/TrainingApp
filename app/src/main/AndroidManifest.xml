@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.tonychen.trainingapp">
+    package="com.tonychen.trainingapp">
 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
         android:name=".DemoApplication"
@@ -25,14 +25,14 @@
             android:noHistory="true"
             android:theme="@style/SplashStyle">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".view.MainActivity"
-            android:label="@string/MainActivity"/>
+            android:label="@string/MainActivity" />
 
         <!-- 一级目录 start -->
         <activity
@@ -40,140 +40,187 @@
             android:description="@string/FloatWindowActivity"
             android:label="悬浮窗">
             <intent-filter>
-                <action android:name="com.tonychen.action.demo"/>
+                <action android:name="com.tonychen.action.demo" />
 
-                <category android:name="com.tonychen.category.trunk"/>
+                <category android:name="com.tonychen.category.trunk" />
             </intent-filter>
 
             <meta-data
                 android:name="priority"
-                android:value="1"/>
+                android:value="10" />
+            <meta-data
+                android:name="category"
+                android:value="com.tonychen.category.floatwindow" />
         </activity>
         <activity
             android:name=".view.CustomViewActivity"
             android:description="@string/CustomViewActivity"
             android:label="自定义View">
             <intent-filter>
-                <action android:name="com.tonychen.action.demo"/>
+                <action android:name="com.tonychen.action.demo" />
 
-                <category android:name="com.tonychen.category.trunk"/>
+                <category android:name="com.tonychen.category.trunk" />
             </intent-filter>
 
             <meta-data
                 android:name="priority"
-                android:value="1"/>
+                android:value="1" />
+            <meta-data
+                android:name="category"
+                android:value="com.tonychen.category.customview" />
+        </activity>
+        <activity
+            android:name=".view.PatternsActivity"
+            android:description="@string/PatternsActivity"
+            android:label="Java设计模式">
+            <intent-filter>
+                <action android:name="com.tonychen.action.demo" />
+
+                <category android:name="com.tonychen.category.trunk" />
+            </intent-filter>
+
+            <meta-data
+                android:name="priority"
+                android:value="2" />
+            <meta-data
+                android:name="category"
+                android:value="com.tonychen.category.patterns" />
         </activity>
         <activity
             android:name=".view.RxJavaActivity"
             android:description="@string/RxJavaActivity"
             android:label="RxJava">
             <intent-filter>
-                <action android:name="com.tonychen.action.demo"/>
+                <action android:name="com.tonychen.action.demo" />
 
-                <category android:name="com.tonychen.category.trunk"/>
+                <category android:name="com.tonychen.category.trunk" />
             </intent-filter>
 
             <meta-data
                 android:name="priority"
-                android:value="2"/>
+                android:value="3" />
+            <meta-data
+                android:name="category"
+                android:value="com.tonychen.category.rxjava" />
         </activity>
         <activity
             android:name=".view.KotlinActivity"
             android:description="@string/KotlinActivity"
             android:label="Kotlin">
             <intent-filter>
-                <action android:name="com.tonychen.action.demo"/>
+                <action android:name="com.tonychen.action.demo" />
 
-                <category android:name="com.tonychen.category.trunk"/>
+                <category android:name="com.tonychen.category.trunk" />
             </intent-filter>
 
             <meta-data
                 android:name="priority"
-                android:value="2"/>
+                android:value="4" />
+            <meta-data
+                android:name="category"
+                android:value="com.tonychen.category.kotlin" />
         </activity>
         <activity
             android:name=".view.JNIActivity"
             android:description="@string/JNIActivity"
             android:label="JNI">
             <intent-filter>
-                <action android:name="com.tonychen.action.demo"/>
+                <action android:name="com.tonychen.action.demo" />
 
-                <category android:name="com.tonychen.category.trunk"/>
+                <category android:name="com.tonychen.category.trunk" />
             </intent-filter>
 
             <meta-data
                 android:name="priority"
-                android:value="3"/>
+                android:value="0" />
+            <meta-data
+                android:name="category"
+                android:value="com.tonychen.category.jni" />
         </activity>
         <activity
             android:name=".view.OpenSourceLibActivity"
             android:description="@string/OpenSourceLibActivity"
             android:label="OpenSourceLib">
             <intent-filter>
-                <action android:name="com.tonychen.action.demo"/>
+                <action android:name="com.tonychen.action.demo" />
 
-                <category android:name="com.tonychen.category.trunk"/>
+                <category android:name="com.tonychen.category.trunk" />
             </intent-filter>
 
             <meta-data
                 android:name="priority"
-                android:value="3"/>
+                android:value="9" />
+            <meta-data
+                android:name="category"
+                android:value="com.tonychen.category.opensourcelib" />
         </activity>
         <activity
             android:name=".view.OfficialViewActivity"
             android:description="@string/OfficialViewActivity"
             android:label="官方控件">
             <intent-filter>
-                <action android:name="com.tonychen.action.demo"/>
+                <action android:name="com.tonychen.action.demo" />
 
-                <category android:name="com.tonychen.category.trunk"/>
+                <category android:name="com.tonychen.category.trunk" />
             </intent-filter>
 
             <meta-data
                 android:name="priority"
-                android:value="3"/>
+                android:value="8" />
+            <meta-data
+                android:name="category"
+                android:value="com.tonychen.category.officialview" />
         </activity>
         <activity
             android:name=".view.AnimatorActivity"
             android:description="@string/AnimatorActivity"
             android:label="动画">
             <intent-filter>
-                <action android:name="com.tonychen.action.demo"/>
+                <action android:name="com.tonychen.action.demo" />
 
-                <category android:name="com.tonychen.category.trunk"/>
+                <category android:name="com.tonychen.category.trunk" />
             </intent-filter>
 
             <meta-data
                 android:name="priority"
-                android:value="3"/>
+                android:value="7" />
+            <meta-data
+                android:name="category"
+                android:value="com.tonychen.category.animator" />
         </activity>
         <activity
             android:name=".view.AndroidSystemActivity"
             android:description="@string/AndroidSystemActivity"
             android:label="Android系统机制/特性">
             <intent-filter>
-                <action android:name="com.tonychen.action.demo"/>
+                <action android:name="com.tonychen.action.demo" />
 
-                <category android:name="com.tonychen.category.trunk"/>
+                <category android:name="com.tonychen.category.trunk" />
             </intent-filter>
 
             <meta-data
                 android:name="priority"
-                android:value="3"/>
+                android:value="6" />
+            <meta-data
+                android:name="category"
+                android:value="com.tonychen.category.androidsystem" />
         </activity>
         <activity
             android:name=".view.UtilsActivity"
             android:description="@string/UtilsActivity"
             android:label="自制小工具">
             <intent-filter>
-                <action android:name="com.tonychen.action.demo"/>
+                <action android:name="com.tonychen.action.demo" />
 
-                <category android:name="com.tonychen.category.trunk"/>
+                <category android:name="com.tonychen.category.trunk" />
             </intent-filter>
 
             <meta-data
                 android:name="priority"
-                android:value="3"/>
+                android:value="11" />
+            <meta-data
+                android:name="category"
+                android:value="com.tonychen.category.utils" />
         </activity>
 
         <!-- 一级目录 end -->
@@ -186,10 +233,10 @@
             android:description="@string/CommonFloatWindowActivity"
             android:label="普通浮窗示例">
             <intent-filter>
-                <action android:name="com.tonychen.action.demo"/>
+                <action android:name="com.tonychen.action.demo" />
 
-                <category android:name="com.tonychen.category.branch"/>
-                <category android:name="com.tonychen.category.floatwindow"/>
+                <category android:name="com.tonychen.category.branch" />
+                <category android:name="com.tonychen.category.floatwindow" />
             </intent-filter>
         </activity>
 
@@ -198,7 +245,7 @@
         <service
             android:name=".services.FloatContralService"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="false" />
 
     </application>
 

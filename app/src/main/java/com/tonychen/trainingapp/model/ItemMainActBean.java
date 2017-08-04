@@ -9,6 +9,12 @@ public class ItemMainActBean {
     private String title;
     private int priority;
 
+    public String getCategory() {
+        return category;
+    }
+
+    private String category;
+
     public String getClazzName() {
         return clazzName;
     }
@@ -30,10 +36,15 @@ public class ItemMainActBean {
     }
 
     public ItemMainActBean(String clazzName, String title, String intro, int priority) {
+        this(clazzName, title, intro, priority, "");
+    }
+
+    public ItemMainActBean(String clazzName, String title, String intro, int priority, String category) {
         this.clazzName = clazzName;
         this.title = title;
         this.intro = intro;
         this.priority = priority;
+        this.category = category;
     }
 
     private String intro;

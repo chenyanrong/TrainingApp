@@ -12,6 +12,7 @@
     <string name="MainActivity">主界面</string>
     <string name="RxJavaActivity">RxJava基础</string>
     <string name="CustomViewActivity">自定义View</string>
+    <string name="PatternsActivity">常用设计模式示例</string>
     <string name="KotlinActivity">Kotlin基础</string>
     <string name="JNIActivity">JNI</string>
     <string name="OpenSourceLibActivity">开源项目</string>
