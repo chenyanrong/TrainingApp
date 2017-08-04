@@ -1,4 +1,4 @@
-package com.tonychen.trainingapp.view.interf;
+package com.tonychen.trainingapp.view.base;
 
 import android.view.View;
 

@@ -3,7 +3,7 @@ package com.tonychen.trainingapp.view;
 import android.os.Bundle;
 
 import com.tonychen.trainingapp.R;
-import com.tonychen.trainingapp.view.interf.BaseTitleActivity;
+import com.tonychen.trainingapp.view.base.BaseTitleActivity;
 
 public class RxJavaActivity extends BaseTitleActivity {
 

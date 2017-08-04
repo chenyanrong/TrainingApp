@@ -8,7 +8,7 @@ import com.tonychen.trainingapp.manager.IFloatContral;
 import com.tonychen.trainingapp.services.FloatContralService;
 import com.tonychen.trainingapp.view.customviews.NormalView;
 import com.tonychen.trainingapp.view.customviews.RoundView;
-import com.tonychen.trainingapp.view.interf.BaseTitleActivity;
+import com.tonychen.trainingapp.view.base.BaseTitleActivity;
 
 public class CommonFloatWindowActivity extends BaseTitleActivity {
     private IFloatContral mFloatContral;

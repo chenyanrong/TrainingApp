@@ -20,7 +20,7 @@ import com.tonychen.trainingapp.R;
 import com.tonychen.trainingapp.adapter.MainActAdapter;
 import com.tonychen.trainingapp.model.ItemMainActBean;
 import com.tonychen.trainingapp.utils.ToastUtil;
-import com.tonychen.trainingapp.view.interf.BaseTitleActivity;
+import com.tonychen.trainingapp.view.base.BaseTitleActivity;
 
 import java.util.ArrayList;
 import java.util.List;

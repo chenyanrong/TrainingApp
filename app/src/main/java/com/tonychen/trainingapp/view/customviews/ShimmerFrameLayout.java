@@ -1,6 +1,6 @@
 // Copyright 2004-present Facebook. All Rights Reserved.
-
-package com.facebook.shimmer;
+// 项目来源https://github.com/facebook/shimmer-android
+package com.tonychen.trainingapp.view.customviews;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;

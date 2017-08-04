@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 import com.tonychen.tonylib.utils.UIUtil;
 import com.tonychen.trainingapp.R;
 import com.tonychen.trainingapp.manager.FloatWindowManager;
-import com.tonychen.trainingapp.view.interf.IFloatView;
+import com.tonychen.trainingapp.view.base.IFloatView;
 
 /**
  * Created by TonyChen on 2017/07/31;

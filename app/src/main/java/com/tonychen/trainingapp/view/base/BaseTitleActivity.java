@@ -1,7 +1,5 @@
-package com.tonychen.trainingapp.view.interf;
+package com.tonychen.trainingapp.view.base;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.tonychen.trainingapp.R;
