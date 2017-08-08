@@ -1,5 +1,6 @@
 package com.tonychen.trainingapp.view;
 
+import android.animation.ObjectAnimator;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -30,6 +31,7 @@ import com.tonychen.trainingapp.adapter.MainActAdapter;
 import com.tonychen.trainingapp.model.ItemMainActBean;
 import com.tonychen.trainingapp.utils.ToastUtil;
 import com.tonychen.trainingapp.view.base.BaseActivity;
+import com.tonychen.trainingapp.view.customviews.ShimmerFrameLayout;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -45,6 +47,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private List<ItemMainActBean> mData;
+    private ShimmerFrameLayout shimmerFrameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +79,6 @@ public class MainActivity extends BaseActivity {
                 ActivityInfo activityInfo = packageManager.getActivityInfo(componentName, PackageManager.GET_META_DATA);
                 priority = activityInfo.metaData.getInt("priority");
                 category = activityInfo.metaData.getString("category");
-                Logger.e("priority = " + priority);
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
@@ -106,7 +108,24 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (null != shimmerFrameLayout) {
+            shimmerFrameLayout.startShimmerAnimation();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (null != shimmerFrameLayout) {
+            shimmerFrameLayout.stopShimmerAnimation();
+        }
+    }
+
+    @Override
     protected void initView() {
+
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);// 给左上角图标的左边加上一个返回的图标
@@ -144,6 +163,15 @@ public class MainActivity extends BaseActivity {
                 return false;
             }
         });
+
+
+        shimmerFrameLayout = (ShimmerFrameLayout) navigationView.getHeaderView(0).findViewById(R.id.sfl_container);
+//        shimmerFrameLayout.setBaseAlpha(0.1f);
+//        shimmerFrameLayout.setDropoff(0.1f);
+//        shimmerFrameLayout.setTilt(0);
+
+        shimmerFrameLayout.setDuration(2500);
+        shimmerFrameLayout.setRepeatMode(ObjectAnimator.REVERSE);
 
 //        // Example of a call to a native method
 //        TextView tv = (TextView) findViewById(R.id.sample_text);

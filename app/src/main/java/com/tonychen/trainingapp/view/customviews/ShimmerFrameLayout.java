@@ -21,6 +21,8 @@ import android.util.Log;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 
+import com.tonychen.trainingapp.R;
+
 public class ShimmerFrameLayout extends FrameLayout {
 
   private static final String TAG = "ShimmerFrameLayout";

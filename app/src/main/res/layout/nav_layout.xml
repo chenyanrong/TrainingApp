@@ -18,14 +18,21 @@
         android:padding="8dp"
         android:src="@mipmap/ic_launcher_round" />
 
-    <TextView
-        android:layout_width="match_parent"
+    <com.tonychen.trainingapp.view.customviews.ShimmerFrameLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/sfl_container"
         android:layout_gravity="bottom"
         android:layout_marginBottom="24dp"
-        android:padding="16dp"
-        android:text="TonyChen"
-        android:textColor="@android:color/white" />
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="TonyChen"
+            android:textColor="@android:color/white" />
+    </com.tonychen.trainingapp.view.customviews.ShimmerFrameLayout>
 
     <TextView
         android:layout_width="match_parent"
