@@ -40,7 +40,7 @@ public class BaseActivity extends AppCompatActivity {
             this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             //设置状态栏颜色
             this.getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
-            Logger.i("setStatusBarColor----------");
+//            Logger.i("setStatusBarColor----------");
         }
     }
 
@@ -55,7 +55,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void afterSetContentView() {
         ViewGroup contentView = getContentView();
 //        contentView.getChildAt(0).setFitsSystemWindows(true);
-        Logger.d("setFitsSystemWindows----------------");
+//        Logger.d("setFitsSystemWindows----------------");
 
         if (isKeepScreenOn()) {
             contentView.getChildAt(0).setKeepScreenOn(true);

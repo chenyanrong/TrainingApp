@@ -170,7 +170,7 @@ public class MainActivity extends BaseActivity {
 //        shimmerFrameLayout.setDropoff(0.1f);
 //        shimmerFrameLayout.setTilt(0);
 
-        shimmerFrameLayout.setDuration(2500);
+        shimmerFrameLayout.setDuration(1800);
         shimmerFrameLayout.setRepeatMode(ObjectAnimator.REVERSE);
 
 //        // Example of a call to a native method

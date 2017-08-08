@@ -240,6 +240,18 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".view.itemact.IjkPlayerActivity"
+            android:description="@string/IjkPlayerActivity"
+            android:label="ijk播放器示例">
+            <intent-filter>
+                <action android:name="com.tonychen.action.demo" />
+
+                <category android:name="com.tonychen.category.branch" />
+                <category android:name="com.tonychen.category.opensourcelib" />
+            </intent-filter>
+        </activity>
+
         <!-- 子项目 end -->
 
         <service

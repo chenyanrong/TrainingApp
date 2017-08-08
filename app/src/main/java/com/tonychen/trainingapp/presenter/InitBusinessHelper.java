@@ -55,7 +55,7 @@ public final class InitBusinessHelper {
                 .methodCount(0)         // (Optional) How many method line to show. Default 2
                 .methodOffset(0)        // (Optional) Hides internal method calls up to offset. Default 5
                 .logStrategy(new LogcatLogStrategy()) // (Optional) Changes the log strategy to print out. Default LogCat
-                .tag("TONYCHEN")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
+                .tag("TonyDebugLog")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
                 .build();
         Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
 //        Logger.addLogAdapter(new DiskLogAdapter()); // 把log保存到本地
