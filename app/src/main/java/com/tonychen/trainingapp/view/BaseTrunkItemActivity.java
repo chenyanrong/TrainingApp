@@ -17,6 +17,8 @@ import com.orhanobut.logger.Logger;
 import com.tonychen.trainingapp.R;
 import com.tonychen.trainingapp.adapter.MainActAdapter;
 import com.tonychen.trainingapp.model.ItemMainActBean;
+import com.tonychen.trainingapp.utils.ToastUtil;
+import com.tonychen.trainingapp.view.base.BaseActivity;
 import com.tonychen.trainingapp.view.base.BaseTitleActivity;
 
 import java.util.ArrayList;
@@ -58,16 +60,19 @@ public class BaseTrunkItemActivity extends BaseTitleActivity {
         List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent, PackageManager.GET_RESOLVED_FILTER);
         if (null == resolveInfos || resolveInfos.size() == 0) {
             Logger.e("查询不到任何有效的activity!");
-        }
-        for (ResolveInfo resolveinfo : resolveInfos) {
-            mData.add(
-                    new ItemMainActBean(
-                            resolveinfo.activityInfo.name,
-                            resolveinfo.activityInfo.nonLocalizedLabel.toString(),
-                            getResources().getString(resolveinfo.activityInfo.descriptionRes),
-                            resolveinfo.priority
-                    )
-            );
+            ToastUtil.showText("还没有该项示例");
+            finish();
+        } else {
+            for (ResolveInfo resolveinfo : resolveInfos) {
+                mData.add(
+                        new ItemMainActBean(
+                                resolveinfo.activityInfo.name,
+                                resolveinfo.activityInfo.nonLocalizedLabel.toString(),
+                                getResources().getString(resolveinfo.activityInfo.descriptionRes),
+                                resolveinfo.priority
+                        )
+                );
+            }
         }
     }
 
@@ -83,6 +88,10 @@ public class BaseTrunkItemActivity extends BaseTitleActivity {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, LinearLayout.VERTICAL);
         mRecyclerViewContainer.addItemDecoration(dividerItemDecoration);
 
+        if(null==mData|| mData.size()<1){
+//            finish();
+            return;
+        }
         MainActAdapter mainActAdapter = new MainActAdapter(mData);
         mainActAdapter.setOnItemonClickListener(new MainActAdapter.OnItemonClickListener() {
             @Override
