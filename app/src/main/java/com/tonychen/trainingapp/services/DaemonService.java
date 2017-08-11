@@ -36,6 +36,7 @@ public class DaemonService extends BaseService {
 
     @Override
     public IBinder onBind(Intent intent) {
+        Logger.i("DaemonService onBind intent = " + intent.getAction());
         return mDaemonServiceHolder;
     }
 

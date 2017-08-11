@@ -21,7 +21,30 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class MainService extends BaseService {
 
-    private ServiceConnection mDaemonServiceConnection;
+    private ServiceConnection mDaemonServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            Logger.i("onServiceConnected ComponentName = " + componentName.getClassName());
+            deamonServiceHolder = IDaemonInterface.Stub.asInterface(iBinder);
+            try {
+                Logger.i("MainService 当前PID = " + android.os.Process.myPid() + " 绑定的守护进程的PID = " + deamonServiceHolder.getPID());
+                ToastUtil.showText("MainService 当前PID = " + android.os.Process.myPid() + " 绑定的守护进程的PID = " + deamonServiceHolder.getPID());
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            Logger.i("onServiceDisconnected ComponentName = " + componentName.getClassName());
+            if ((Boolean) SPUtil.getData(Attribute.ISBINDDAEMONSERVICE, false)) {
+                deamonServiceHolder = null;
+                startService(new Intent(MainService.this, DaemonService.class));
+                Logger.i("MainService 重启 DaemonService");
+            }
+        }
+    };
     private IDaemonInterface deamonServiceHolder;
     private Intent startDaemonService;
 
@@ -38,30 +61,7 @@ public class MainService extends BaseService {
         super.onCreate();
         EventBus.getDefault().register(this);
         mMainServiceHolder = new MainServiceHolder();
-        mDaemonServiceConnection = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                Logger.i("onServiceConnected ComponentName = " + componentName.getClassName());
-                deamonServiceHolder = IDaemonInterface.Stub.asInterface(iBinder);
-                try {
-                    Logger.i("MainService 当前PID = " + android.os.Process.myPid() + " 绑定的守护进程的PID = " + deamonServiceHolder.getPID());
-                    ToastUtil.showText("MainService 当前PID = " + android.os.Process.myPid() + " 绑定的守护进程的PID = " + deamonServiceHolder.getPID());
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
 
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName componentName) {
-                Logger.i("onServiceDisconnected ComponentName = " + componentName.getClassName());
-                if ((Boolean) SPUtil.getData(Attribute.ISBINDDAEMONSERVICE, false)) {
-                    deamonServiceHolder = null;
-                    startService(new Intent(MainService.this, DaemonService.class));
-                    Logger.i("MainService 重启 DaemonService");
-                }
-            }
-        };
         startDaemonService = new Intent(MainService.this, DaemonService.class);
         keepAppAlive((Boolean) SPUtil.getData(Attribute.ISBINDDAEMONSERVICE, false));
 
@@ -87,12 +87,12 @@ public class MainService extends BaseService {
     private void keepAppAlive(final boolean isBindDaemonService) {
         Logger.i("keepAppAlive isBindDaemonService = " + isBindDaemonService);
         if (isBindDaemonService) {
-            /**
-             * 如果已经绑过来了,就没有必要再调用了
-             */
-            if (deamonServiceHolder == null) {
-                bindService(startDaemonService, mDaemonServiceConnection, BIND_AUTO_CREATE);
-            }
+//            /**
+//             * 如果已经绑过来了,就没有必要再调用了
+//             */
+//            if (deamonServiceHolder == null) {
+            bindService(startDaemonService, mDaemonServiceConnection, BIND_AUTO_CREATE);
+//            }
 
         } else {
             if (deamonServiceHolder == null) {

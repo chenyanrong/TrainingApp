@@ -39,7 +39,7 @@ public final class InitBusinessHelper {
             @Override
             public void run() {
                 runInSubThread();
-                Logger.i("--------------initInSubThread finish --------------");
+                Logger.i("--------------initInSubThread finish PID = "+android.os.Process.myPid()+"--------------");
             }
         });
     }
@@ -76,7 +76,7 @@ public final class InitBusinessHelper {
 
         initXFly(app);
 
-        Logger.i("--------------initInMainThread finish-----------");
+        Logger.i("--------------initInMainThread finish PID = "+android.os.Process.myPid()+"-----------");
 
 
     }
