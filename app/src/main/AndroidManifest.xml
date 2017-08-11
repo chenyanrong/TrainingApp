@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.tonychen.trainingapp">
 
+    <!-- 浮窗权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_LOGS" />
+    <!-- 连接网络权限，用于执行云端语音能力 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- 读取网络信息状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 获取当前wifi状态 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 允许程序改变网络连接状态 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <!-- 读取手机信息权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 读取联系人权限，上传联系人需要用到此权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- 外存储写权限，构建语法需要用到此权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 外存储读权限，构建语法需要用到此权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 配置权限，用来记录应用配置信息 -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!-- 手机定位信息，用来为语义等功能提供定位，提供更精准的服务 -->
+    <!-- 定位信息是敏感信息，可通过Setting.setLocationEnable(false)关闭定位请求 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 如需使用人脸识别，还要添加：摄相头权限，拍照需要用到 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <provider
+        android:name="android.support.v4.content.FileProvider"
+        android:authorities="com.tonychen.trainingapp.fileProvider"
+        android:exported="false"
+        android:grantUriPermissions="true">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/file_paths" />
+    </provider>
 
     <application
         android:name=".DemoApplication"
@@ -21,9 +52,14 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".view.SplashActivity"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/app_name"
             android:launchMode="singleTask"
             android:noHistory="true"
-            android:theme="@style/SplashStyle">
+            android:taskAffinity="com.tonychen.trainingapp"
+            android:theme="@style/SplashStyle"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,6 +68,7 @@
         </activity>
         <activity
             android:name=".view.MainActivity"
+            android:launchMode="singleTop"
             android:label="@string/MainActivity" />
 
         <!-- 一级目录 start -->
@@ -222,6 +259,41 @@
                 android:name="category"
                 android:value="com.tonychen.category.utils" />
         </activity>
+        <activity
+            android:name=".view.SDKTrainingActivity"
+            android:description="@string/UtilsActivity"
+            android:label="接入_SDK">
+            <intent-filter>
+                <action android:name="com.tonychen.action.demo" />
+
+                <category android:name="com.tonychen.category.trunk" />
+            </intent-filter>
+
+            <meta-data
+                android:name="priority"
+                android:value="5" />
+            <meta-data
+                android:name="category"
+                android:value="com.tonychen.category.sdktraining" />
+        </activity>
+        <activity
+            android:name=".view.ConfigurationActivity"
+            android:description="@string/ConfigurationActivity"
+            android:label="应用配置">
+            <intent-filter>
+                <action android:name="com.tonychen.action.demo" />
+
+                <category android:name="com.tonychen.category.trunk" />
+            </intent-filter>
+
+            <meta-data
+                android:name="priority"
+                android:value="12" />
+            <meta-data
+                android:name="category"
+                android:value="com.tonychen.category.configuration" />
+
+        </activity>
 
         <!-- 一级目录 end -->
 
@@ -239,16 +311,48 @@
                 <category android:name="com.tonychen.category.floatwindow" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.itemact.IjkPlayerActivity"
             android:description="@string/IjkPlayerActivity"
-            android:label="ijk播放器示例">
+            android:label="IJK播放器示例">
             <intent-filter>
                 <action android:name="com.tonychen.action.demo" />
 
                 <category android:name="com.tonychen.category.branch" />
                 <category android:name="com.tonychen.category.opensourcelib" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.itemact.EventBusDemoActivity"
+            android:description="@string/EventBusDemoActivity"
+            android:label="事件总线框架">
+            <intent-filter>
+                <action android:name="com.tonychen.action.demo" />
+
+                <category android:name="com.tonychen.category.branch" />
+                <category android:name="com.tonychen.category.opensourcelib" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.itemact.XFlyFaceDemoActivity"
+            android:description="@string/XFlyFaceDemoActivity"
+            android:label="面部识别">
+            <intent-filter>
+                <action android:name="com.tonychen.action.demo" />
+
+                <category android:name="com.tonychen.category.branch" />
+                <category android:name="com.tonychen.category.sdktraining" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.itemact.CustomViewActivity"
+            android:description="@string/itemactCustomViewActivity"
+            android:label="View的生命周期">
+            <intent-filter>
+                <action android:name="com.tonychen.action.demo" />
+
+                <category android:name="com.tonychen.category.branch" />
+                <category android:name="com.tonychen.category.customview" />
             </intent-filter>
         </activity>
 
@@ -259,6 +363,17 @@
             android:enabled="true"
             android:exported="false" />
 
+        <activity android:name=".view.subactivity.OnlineFaceDemoActivity" />
+
+        <service
+            android:name=".services.DaemonService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":daemonprocess" />
+        <service
+            android:name=".services.MainService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

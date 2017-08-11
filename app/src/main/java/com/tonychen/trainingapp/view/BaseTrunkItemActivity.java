@@ -96,7 +96,7 @@ public class BaseTrunkItemActivity extends BaseTitleActivity {
         mainActAdapter.setOnItemonClickListener(new MainActAdapter.OnItemonClickListener() {
             @Override
             public void onItemClick(View view, int postion) {
-                Logger.e("onItemClick: postion" + postion + " className = " + mData.get(postion).getClazzName());
+                Logger.d("onItemClick: postion" + postion + " className = " + mData.get(postion).getClazzName());
                 try {
                     Intent startActIntent = new Intent(BaseTrunkItemActivity.this, Class.forName(mData.get(postion).getClazzName()));
                     startActivity(startActIntent);

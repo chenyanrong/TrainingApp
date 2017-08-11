@@ -20,7 +20,14 @@ public class Attribute {
     public static final int time_showsplash = 0;
 
     /**
-     *  保持应用窗口常亮
+     * 保持应用窗口常亮
      */
     public static final boolean isKeepScreenOn = true;
+
+    public static final String XFLY_APPID = "598c2151";
+
+    /**
+     * 是否开启双进程守护
+     */
+    public static final String ISBINDDAEMONSERVICE = "isBindDaemonService";
 }

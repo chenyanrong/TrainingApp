@@ -1,7 +1,9 @@
 package com.tonychen.trainingapp.presenter;
 
 import android.app.Application;
+import android.content.Intent;
 
+import com.iflytek.cloud.SpeechUtility;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.LogcatLogStrategy;
@@ -13,6 +15,9 @@ import com.tonychen.trainingapp.BuildConfig;
 import com.tonychen.trainingapp.DemoApplication;
 import com.tonychen.trainingapp.config.Attribute;
 import com.tonychen.trainingapp.manager.HandlerManager;
+import com.tonychen.trainingapp.services.DaemonService;
+import com.tonychen.trainingapp.services.MainService;
+import com.tonychen.trainingapp.utils.SPUtil;
 
 /**
  * Created by TonyChen on 2017/08/01;
@@ -34,7 +39,7 @@ public final class InitBusinessHelper {
             @Override
             public void run() {
                 runInSubThread();
-                Logger.i(" initInSubThread finish");
+                Logger.i("--------------initInSubThread finish --------------");
             }
         });
     }
@@ -65,8 +70,29 @@ public final class InitBusinessHelper {
 //            }
 //        });
 
+        initMainService(app);
+
         CrashReport.initCrashReport(app, Attribute.BuglyAppID, BuildConfig.DEBUG);
 
-        Logger.i("initInMainThread finish");
+        initXFly(app);
+
+        Logger.i("--------------initInMainThread finish-----------");
+
+
+    }
+
+    private void initMainService(Application app) {
+        app.startService(new Intent(app, MainService.class));
+//        app.startService(new Intent(app, DaemonService.class));
+    }
+
+
+
+
+    /**
+     * 初始化讯飞平台
+     */
+    private void initXFly(Application app) {
+        SpeechUtility.createUtility(app, "appid=" + Attribute.XFLY_APPID);
     }
 }

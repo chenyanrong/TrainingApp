@@ -18,8 +18,8 @@ public class UIUtil {
     /**
      * 通过系统属性设置获取actionbar的高度
      *
-     * @param context
-     * @return
+     * @param context context
+     * @return actionbarheight
      */
     public static int getActionBarHeight(Context context) {
 //        try {
@@ -44,8 +44,8 @@ public class UIUtil {
     /**
      * 获取当前设备的显示器的显示区矩阵信息
      *
-     * @param context
-     * @return
+     * @param context context
+     * @return displaymetrices
      */
     public static DisplayMetrics getDisplayMetrics(Context context) {
         return context.getResources().getDisplayMetrics();
@@ -54,8 +54,8 @@ public class UIUtil {
     /**
      * 获取当前设备的显示器的像素密度与标准屏幕(320*480)的比值
      *
-     * @param context
-     * @return
+     * @param context context
+     * @return displayDensity
      */
     public static float getDisplayDensity(Context context) {
         return context.getResources().getDisplayMetrics().density;
@@ -65,8 +65,8 @@ public class UIUtil {
     /**
      * 获取当前设备显示器的宽度的像素值
      *
-     * @param context
-     * @return
+     * @param context context
+     * @return screenwidth
      */
     public static int getScreenWidth(Context context) {
         DisplayMetrics metrics = getDisplayMetrics(context);
@@ -76,8 +76,8 @@ public class UIUtil {
     /**
      * 获取当前设备显示器的高度的像素值
      *
-     * @param context
-     * @return
+     * @param context context
+     * @return getscreenheight
      */
     public static int getScreenHeight(Context context) {
         DisplayMetrics metrics = getDisplayMetrics(context);
@@ -87,9 +87,9 @@ public class UIUtil {
     /**
      * dip转换成px
      *
-     * @param context
-     * @param dip
-     * @return
+     * @param context context
+     * @param dip dip
+     * @return px
      */
     public static int dip2px(Context context, int dip) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
@@ -100,9 +100,9 @@ public class UIUtil {
     /**
      * px转换成dip
      *
-     * @param context
-     * @param px
-     * @return
+     * @param context context
+     * @param px px
+     * @return dip
      */
     public static int px2dip(Context context, int px) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
@@ -113,9 +113,9 @@ public class UIUtil {
     /**
      * px转成sp，主要用于字体
      *
-     * @param context
-     * @param px
-     * @return
+     * @param context context
+     * @param px px
+     * @return dip
      */
     public static int px2sp(Context context, int px) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
@@ -126,9 +126,9 @@ public class UIUtil {
     /**
      * sp转换成px
      *
-     * @param context
-     * @param sp
-     * @return
+     * @param context context
+     * @param sp sp
+     * @return px
      */
     public static int sp2px(Context context, int sp) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();

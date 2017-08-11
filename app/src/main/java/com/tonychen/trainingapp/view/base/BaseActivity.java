@@ -64,7 +64,7 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         fetchData();
-        
+
         initView();
     }
 

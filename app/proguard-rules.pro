@@ -24,5 +24,11 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+-keep public class com.tonychen.trainingapp.events.**{*;}
+-keep public class com.tonychen.trainingapp.model.**{*;}
+
 -dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}
+
+-keep class com.iflytek.**{*;}
+-keepattributes Signature
