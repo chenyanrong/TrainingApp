@@ -24,7 +24,7 @@ public class DaemonService extends BaseService {
     private Runnable checkAliveTask = new Runnable() {
         @Override
         public void run() {
-            Logger.d("DaemonService PID = " + android.os.Process.myPid() + " is alive ===>>>> " + System.currentTimeMillis());
+//            Logger.d("DaemonService PID = " + android.os.Process.myPid() + " is alive ===>>>> " + System.currentTimeMillis());
             mMainHandler.postDelayed(this, 3000);
         }
     };
