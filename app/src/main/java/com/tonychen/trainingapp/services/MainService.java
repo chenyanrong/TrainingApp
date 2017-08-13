@@ -90,9 +90,9 @@ public class MainService extends BaseService {
 //            /**
 //             * 如果已经绑过来了,就没有必要再调用了
 //             */
-//            if (deamonServiceHolder == null) {
+            if (deamonServiceHolder == null) {
             bindService(startDaemonService, mDaemonServiceConnection, BIND_AUTO_CREATE);
-//            }
+            }
 
         } else {
             if (deamonServiceHolder == null) {

@@ -68,8 +68,8 @@
         </activity>
         <activity
             android:name=".view.MainActivity"
-            android:launchMode="singleTop"
-            android:label="@string/MainActivity" />
+            android:label="@string/MainActivity"
+            android:launchMode="singleTop" />
 
         <!-- 一级目录 start -->
         <activity
@@ -292,7 +292,6 @@
             <meta-data
                 android:name="category"
                 android:value="com.tonychen.category.configuration" />
-
         </activity>
 
         <!-- 一级目录 end -->
@@ -373,7 +372,7 @@
         <service
             android:name=".services.MainService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"></service>
     </application>
 
 </manifest>

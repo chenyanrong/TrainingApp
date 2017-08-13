@@ -6,7 +6,6 @@ import android.content.ServiceConnection;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.provider.Settings;
 
 import com.orhanobut.logger.Logger;
 import com.tonychen.trainingapp.IDaemonInterface;
@@ -24,8 +23,8 @@ public class DaemonService extends BaseService {
     private Runnable checkAliveTask = new Runnable() {
         @Override
         public void run() {
-//            Logger.d("DaemonService PID = " + android.os.Process.myPid() + " is alive ===>>>> " + System.currentTimeMillis());
-            mMainHandler.postDelayed(this, 3000);
+            Logger.d("DaemonService PID = " + android.os.Process.myPid() + " is alive ===>>>> " + System.currentTimeMillis());
+            mMainHandler.postDelayed(this, 10000);
         }
     };
 
@@ -80,6 +79,12 @@ public class DaemonService extends BaseService {
     }
 
     @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+//        return super.onStartCommand(intent, flags, startId);
+        return START_NOT_STICKY;
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         mInstance = null;
@@ -107,13 +112,19 @@ public class DaemonService extends BaseService {
         }
 
         @Override
-        public void stopDeamonService() throws RemoteException {
-            if (mInstance != null) {
-                mInstance.stopSelf();
-                Logger.i("stopDeamonService");
+        public void stopDeamonService() {
+            try {
+                if (mInstance != null) {
+                    mInstance.stopSelf();
+                    Logger.i("stopDeamonService");
+//                    DemoApplication.getInstance().exitApp(0);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                Logger.e(ex.getMessage());
             }
-        }
 
+        }
 
     }
 }

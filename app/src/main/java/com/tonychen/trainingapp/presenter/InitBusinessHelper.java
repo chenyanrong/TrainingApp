@@ -15,9 +15,7 @@ import com.tonychen.trainingapp.BuildConfig;
 import com.tonychen.trainingapp.DemoApplication;
 import com.tonychen.trainingapp.config.Attribute;
 import com.tonychen.trainingapp.manager.HandlerManager;
-import com.tonychen.trainingapp.services.DaemonService;
 import com.tonychen.trainingapp.services.MainService;
-import com.tonychen.trainingapp.utils.SPUtil;
 
 /**
  * Created by TonyChen on 2017/08/01;

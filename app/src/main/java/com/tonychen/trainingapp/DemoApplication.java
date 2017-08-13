@@ -5,7 +5,11 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.FormatStrategy;
+import com.orhanobut.logger.LogcatLogStrategy;
 import com.orhanobut.logger.Logger;
+import com.orhanobut.logger.PrettyFormatStrategy;
 import com.tonychen.trainingapp.presenter.InitBusinessHelper;
 
 import java.util.List;
@@ -20,15 +24,16 @@ import java.util.List;
 public class DemoApplication extends Application {
     private static final String TAG = DemoApplication.class.getSimpleName();
 
-    public static Application getInstance() {
+    public static DemoApplication getInstance() {
         return mInstance;
     }
 
-    private static Application mInstance;
+    private static DemoApplication mInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        mInstance = this;
 
         /**
          * 解决多进程,重复初始化application的问题
@@ -40,11 +45,23 @@ public class DemoApplication extends Application {
             for (ActivityManager.RunningAppProcessInfo procInfo : runningApps) {
                 if (procInfo.pid == pid) {
                     if (procInfo.processName.equals("com.tonychen.trainingapp")) {
-                        mInstance = this;
                         initApp();
-                        Logger.i("process name is " + procInfo.processName);
+                        if (BuildConfig.DEBUG) {
+                            Log.d("TonyDebugLog", "process name is " + procInfo.processName);
+                        }
                     } else if (procInfo.processName.equals("com.tonychen.trainingapp:daemonprocess")) {
-                        Logger.i("process name is " + procInfo.processName);
+                        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
+                                .showThreadInfo(false)  // (Optional) Whether to show thread info or not. Default true
+                                .methodCount(0)         // (Optional) How many method line to show. Default 2
+                                .methodOffset(0)        // (Optional) Hides internal method calls up to offset. Default 5
+                                .logStrategy(new LogcatLogStrategy()) // (Optional) Changes the log strategy to print out. Default LogCat
+                                .tag("TonyDebugLog")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
+                                .build();
+                        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
+//                        startService(new Intent(getApplicationContext(), DaemonService.class));
+                        if (BuildConfig.DEBUG) {
+                            Log.d("TonyDebugLog", "process name is " + procInfo.processName);
+                        }
                     }
                 }
             }
@@ -66,5 +83,16 @@ public class DemoApplication extends Application {
     public void onTerminate() {
         super.onTerminate();
         Logger.e("DemoApplication onTerminate ");
+    }
+
+    /**
+     * 销毁虚拟机
+     *
+     * @param status 退出状态
+     */
+    public final void exitApp(int status) {
+        Logger.e("销毁虚拟机" + Log.getStackTraceString(new RuntimeException("call exitApp status = " + status)));
+        System.exit(status);
+
     }
 }
