@@ -29,7 +29,9 @@ public class MainActAdapter extends RecyclerView.Adapter<MainActAdapter.ItemMain
 
     @Override
     public ItemMainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemMainViewHolder viewHolder = new ItemMainViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_act_main, parent, false));
+        ItemMainViewHolder viewHolder = new ItemMainViewHolder(
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.item_act_main, parent, false)
+        );
         return viewHolder;
     }
 

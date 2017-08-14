@@ -48,20 +48,20 @@ android {
         }
     }
 
-    // 自定义输出配置
-    applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
-            if (outputFile != null && outputFile.name.endsWith('.apk')) {
-                def fileName = "trainingapp_${variant.buildType.name}_${variant.versionName}.apk"
-                if (variant.buildType.name.equals('debug')) {
-                    output.outputFile = new File("E:\\workspace\\trainingapp\\debugapk", fileName)
-                } else {
-                    output.outputFile = new File("E:\\workspace\\trainingapp\\releaseapk", fileName)
-                }
-            }
-        }
-    }
+//    // 自定义输出配置
+//    applicationVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            def outputFile = output.outputFile
+//            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                def fileName = "trainingapp_${variant.buildType.name}_${variant.versionName}.apk"
+//                if (variant.buildType.name.equals('debug')) {
+//                    output.outputFile = new File("E:\\workspace\\trainingapp\\debugapk", fileName)
+//                } else {
+//                    output.outputFile = new File("E:\\workspace\\trainingapp\\releaseapk", fileName)
+//                }
+//            }
+//        }
+//    }
 
     lintOptions {
         abortOnError false
@@ -96,4 +96,7 @@ dependencies {
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+////    compile project(':ijkplayer-java-release')
+//    compile 'tv.danmaku.ijk.media:ijkplayer-java:0.8.2'
+//    compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.2'
 }
