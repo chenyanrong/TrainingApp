@@ -3,6 +3,7 @@ package com.tonychen.trainingapp.services;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -11,6 +12,8 @@ import android.provider.Settings;
 import com.orhanobut.logger.Logger;
 import com.tonychen.trainingapp.IDaemonInterface;
 import com.tonychen.trainingapp.IMainInterface;
+import com.tonychen.trainingapp.config.Attribute;
+import com.tonychen.trainingapp.utils.SPUtil;
 
 /**
  * 守护进程
@@ -20,14 +23,14 @@ public class DaemonService extends BaseService {
     private IMainInterface mainServiceHolder;
     private Intent itMainService;
     private static DaemonService mInstance;
-
-    private Runnable checkAliveTask = new Runnable() {
-        @Override
-        public void run() {
-//            Logger.d("DaemonService PID = " + android.os.Process.myPid() + " is alive ===>>>> " + System.currentTimeMillis());
-            mMainHandler.postDelayed(this, 3000);
-        }
-    };
+//
+//    private Runnable checkAliveTask = new Runnable() {
+//        @Override
+//        public void run() {
+////            Logger.d("DaemonService PID = " + android.os.Process.myPid() + " is alive ===>>>> " + System.currentTimeMillis());
+//            mMainHandler.postDelayed(this, 3000);
+//        }
+//    };
 
     private Handler mMainHandler = new Handler();
 
@@ -67,26 +70,36 @@ public class DaemonService extends BaseService {
             public void onServiceDisconnected(ComponentName componentName) {
                 Logger.i("onServiceDisconnected ComponentName = " + componentName.getClassName());
                 mainServiceHolder = null;
-                startService(new Intent(DaemonService.this, MainService.class));
-                Logger.i("DaemonService 重启 MainService");
+                try {
+                    if((Boolean) SPUtil.getData(DaemonService.this.createPackageContext("com.tonychen.trainingapp", CONTEXT_IGNORE_SECURITY), Attribute.ISBINDDAEMONSERVICE, false)) {
+                        startService(new Intent(DaemonService.this, MainService.class));
+                        Logger.i("DaemonService 重启 MainService");
+                    }
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
 
             }
         };
-        if (mainServiceHolder == null) {
-            bindService(itMainService, mMainServiceConnection, BIND_AUTO_CREATE);
+        try {
+            if (mainServiceHolder == null && (Boolean) SPUtil.getData(createPackageContext("com.tonychen.trainingapp", CONTEXT_IGNORE_SECURITY), Attribute.ISBINDDAEMONSERVICE, false)) {
+                bindService(itMainService, mMainServiceConnection, BIND_AUTO_CREATE);
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
         }
 
-        mMainHandler.post(checkAliveTask);
+//        mMainHandler.post(checkAliveTask);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         mInstance = null;
-        if (mMainHandler != null) {
-            mMainHandler.removeCallbacks(checkAliveTask);
-            mMainHandler = null;
-        }
+//        if (mMainHandler != null) {
+//            mMainHandler.removeCallbacks(checkAliveTask);
+//            mMainHandler = null;
+//        }
     }
 
     private static final class DaemonServiceHolder extends IDaemonInterface.Stub {
