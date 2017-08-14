@@ -3,12 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<tv.danmaku.ijk.media.player.IjkMediaPlayer-->
-        <!--android:id="@+id/video_view"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_gravity="center"></tv.danmaku.ijk.media.player.IjkMediaPlayer>-->
-
-
+    <com.tonychen.trainingapp.media.IjkVideoView
+        android:layout_width="match_parent"
+        android:id="@+id/ijk_videoview"
+        android:layout_height="match_parent"></com.tonychen.trainingapp.media.IjkVideoView>
 
 </RelativeLayout>

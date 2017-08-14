@@ -374,6 +374,10 @@
             android:name=".services.MainService"
             android:enabled="true"
             android:exported="false" />
+        <service
+            android:name=".services.MediaPlayerService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -1,1 +1,1 @@
-include ':app', ':tonylib'
+include ':app', ':tonylib', ':ijkplayer-java'
