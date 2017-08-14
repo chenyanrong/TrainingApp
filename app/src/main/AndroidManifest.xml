@@ -368,12 +368,12 @@
         <service
             android:name=".services.DaemonService"
             android:enabled="true"
-            android:exported="true"
+            android:exported="false"
             android:process=":daemonprocess" />
         <service
             android:name=".services.MainService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@ import android.os.RemoteException;
 import android.provider.Settings;
 
 import com.orhanobut.logger.Logger;
+import com.tonychen.trainingapp.DemoApplication;
 import com.tonychen.trainingapp.IDaemonInterface;
 import com.tonychen.trainingapp.IMainInterface;
 import com.tonychen.trainingapp.config.Attribute;
@@ -71,7 +72,7 @@ public class DaemonService extends BaseService {
                 Logger.i("onServiceDisconnected ComponentName = " + componentName.getClassName());
                 mainServiceHolder = null;
                 try {
-                    if((Boolean) SPUtil.getData(DaemonService.this.createPackageContext("com.tonychen.trainingapp", CONTEXT_IGNORE_SECURITY), Attribute.ISBINDDAEMONSERVICE, false)) {
+                    if ((Boolean) SPUtil.getData(DaemonService.this.createPackageContext("com.tonychen.trainingapp", CONTEXT_IGNORE_SECURITY), Attribute.ISBINDDAEMONSERVICE, false)) {
                         startService(new Intent(DaemonService.this, MainService.class));
                         Logger.i("DaemonService 重启 MainService");
                     }
@@ -84,6 +85,7 @@ public class DaemonService extends BaseService {
         try {
             if (mainServiceHolder == null && (Boolean) SPUtil.getData(createPackageContext("com.tonychen.trainingapp", CONTEXT_IGNORE_SECURITY), Attribute.ISBINDDAEMONSERVICE, false)) {
                 bindService(itMainService, mMainServiceConnection, BIND_AUTO_CREATE);
+                Logger.i("DaemonService 绑定MainService!");
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -96,13 +98,14 @@ public class DaemonService extends BaseService {
     public void onDestroy() {
         super.onDestroy();
         mInstance = null;
-//        if (mMainHandler != null) {
+        if (mMainHandler != null) {
 //            mMainHandler.removeCallbacks(checkAliveTask);
-//            mMainHandler = null;
-//        }
+            mMainHandler = null;
+        }
     }
 
-    private static final class DaemonServiceHolder extends IDaemonInterface.Stub {
+    private final class DaemonServiceHolder extends IDaemonInterface.Stub {
+
 
         @Override
         public void basicTypes(int anInt, long aLong, boolean aBoolean,
@@ -122,8 +125,15 @@ public class DaemonService extends BaseService {
         @Override
         public void stopDeamonService() throws RemoteException {
             if (mInstance != null) {
+                unbindService(mMainServiceConnection);
                 mInstance.stopSelf();
                 Logger.i("stopDeamonService");
+                mMainHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        DemoApplication.getInstance().exitApp(0);
+                    }
+                }, 500);
             }
         }
 

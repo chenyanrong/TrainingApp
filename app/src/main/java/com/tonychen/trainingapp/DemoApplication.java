@@ -24,15 +24,16 @@ import java.util.List;
 public class DemoApplication extends Application {
     private static final String TAG = DemoApplication.class.getSimpleName();
 
-    public static Application getInstance() {
+    public static DemoApplication getInstance() {
         return mInstance;
     }
 
-    private static Application mInstance;
+    private static DemoApplication mInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        mInstance = this;
 
         /**
          * 解决多进程,重复初始化application的问题
@@ -44,7 +45,6 @@ public class DemoApplication extends Application {
             for (ActivityManager.RunningAppProcessInfo procInfo : runningApps) {
                 if (procInfo.pid == pid) {
                     if (procInfo.processName.equals("com.tonychen.trainingapp")) {
-                        mInstance = this;
                         initApp();
                         Logger.i("process name is " + procInfo.processName);
                     } else if (procInfo.processName.equals("com.tonychen.trainingapp:daemonprocess")) {
@@ -78,5 +78,16 @@ public class DemoApplication extends Application {
     public void onTerminate() {
         super.onTerminate();
         Logger.e("DemoApplication onTerminate ");
+    }
+
+    /**
+     * 销毁虚拟机
+     *
+     * @param status 退出状态
+     */
+    public final void exitApp(int status) {
+        Logger.e("销毁虚拟机" + Log.getStackTraceString(new RuntimeException("call exitApp status = " + status)));
+        System.exit(status);
+
     }
 }

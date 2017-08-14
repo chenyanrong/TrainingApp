@@ -39,7 +39,6 @@ public class MainService extends BaseService {
         public void onServiceDisconnected(ComponentName componentName) {
             Logger.i("onServiceDisconnected ComponentName = " + componentName.getClassName());
             if ((Boolean) SPUtil.getData(Attribute.ISBINDDAEMONSERVICE, false)) {
-                deamonServiceHolder = null;
                 startService(new Intent(MainService.this, DaemonService.class));
                 Logger.i("MainService 重启 DaemonService");
             }
@@ -78,6 +77,7 @@ public class MainService extends BaseService {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(EventOpenDeamonService event) {
+        Logger.d(" onMessageEvent EventOpenDeamonService event.isOpen =" + event.isOpen);
         keepAppAlive(event.isOpen);
     }
 
@@ -91,22 +91,25 @@ public class MainService extends BaseService {
 //             * 如果已经绑过来了,就没有必要再调用了
 //             */
             if (deamonServiceHolder == null) {
-            bindService(startDaemonService, mDaemonServiceConnection, BIND_AUTO_CREATE);
+                bindService(startDaemonService, mDaemonServiceConnection, BIND_AUTO_CREATE);
             }
 
         } else {
             if (deamonServiceHolder == null) {
+                Logger.i("deamonServiceHolder is null!");
                 return;
             }
             try {
+
                 deamonServiceHolder.stopDeamonService();
+                unbindService(mDaemonServiceConnection);
+                deamonServiceHolder = null;
                 ToastUtil.showText("断开与守护进程的连接");
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
 
         }
-
 
     }
 
