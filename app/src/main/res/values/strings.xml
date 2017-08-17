@@ -26,6 +26,7 @@
     <string name="IjkPlayerActivity">ijkplayer开源项目使用</string>
     <string name="EventBusDemoActivity">EventBus</string>
     <string name="XFlyFaceDemoActivity">讯飞面部识别</string>
+    <string name="FastJsonActivity">json转换</string>
     <string name="itemactCustomViewActivity">自定义函数回调顺序</string>
     <string name="DemoItemActivity">测试示例</string>
     <string name="my_website">https://chenyanrong.github.io/</string>

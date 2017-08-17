@@ -68,8 +68,8 @@
         </activity>
         <activity
             android:name=".view.MainActivity"
-            android:launchMode="singleTop"
-            android:label="@string/MainActivity" />
+            android:label="@string/MainActivity"
+            android:launchMode="singleTop" />
 
         <!-- 一级目录 start -->
         <activity
@@ -292,7 +292,6 @@
             <meta-data
                 android:name="category"
                 android:value="com.tonychen.category.configuration" />
-
         </activity>
 
         <!-- 一级目录 end -->
@@ -345,6 +344,18 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".view.itemact.FastJsonActivity"
+            android:description="@string/FastJsonActivity"
+            android:label="Json转换">
+            <intent-filter>
+                <action android:name="com.tonychen.action.demo" />
+
+                <category android:name="com.tonychen.category.branch" />
+                <category android:name="com.tonychen.category.sdktraining" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".view.itemact.CustomViewActivity"
             android:description="@string/itemactCustomViewActivity"
             android:label="View的生命周期">
@@ -378,6 +389,8 @@
             android:name=".services.MediaPlayerService"
             android:enabled="true"
             android:exported="false" />
+
+
     </application>
 
 </manifest>
