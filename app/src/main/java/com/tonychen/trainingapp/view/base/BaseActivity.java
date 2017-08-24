@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -152,36 +151,36 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Logger.i(this.getClass().getSimpleName() + "--->onRestart");
+//        Logger.i(this.getClass().getSimpleName() + "--->onRestart");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Logger.i(this.getClass().getSimpleName() + "--->onStart");
+//        Logger.i(this.getClass().getSimpleName() + "--->onStart");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Logger.i(this.getClass().getSimpleName() + "--->onResume");
+//        Logger.i(this.getClass().getSimpleName() + "--->onResume");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Logger.i(this.getClass().getSimpleName() + "--->onPause");
+//        Logger.i(this.getClass().getSimpleName() + "--->onPause");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Logger.i(this.getClass().getSimpleName() + "--->onStop");
+//        Logger.i(this.getClass().getSimpleName() + "--->onStop");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Logger.i(this.getClass().getSimpleName() + "--->onDestroy");
+//        Logger.i(this.getClass().getSimpleName() + "--->onDestroy");
     }
 }
