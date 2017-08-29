@@ -2,6 +2,8 @@ package com.tonychen.trainingapp.view.base;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +29,7 @@ public class BaseActivity extends AppCompatActivity {
     private static final String TAG = BaseActivity.class.getSimpleName();
 
     private View mTitleView;
+    protected final Handler mMainHandler = new Handler(Looper.getMainLooper());
 
 
     protected void beforeSetContentView() {

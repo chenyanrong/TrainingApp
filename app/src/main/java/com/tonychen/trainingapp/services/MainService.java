@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.view.KeyEvent;
 
 import com.orhanobut.logger.Logger;
 import com.tonychen.trainingapp.IDaemonInterface;
@@ -17,6 +18,8 @@ import com.tonychen.trainingapp.utils.ToastUtil;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.io.IOException;
 
 
 public class MainService extends BaseService {
@@ -114,7 +117,7 @@ public class MainService extends BaseService {
     }
 
 
-    private static final class MainServiceHolder extends IMainInterface.Stub {
+    private final class MainServiceHolder extends IMainInterface.Stub {
 
         @Override
         public void basicTypes(int anInt, long aLong, boolean aBoolean,
@@ -129,6 +132,29 @@ public class MainService extends BaseService {
 
             return android.os.Process.myPid();
             //获取进程pid
+        }
+
+        @Override
+        public void simulateHome() throws RemoteException {
+            Logger.i("simulateHome");
+            Intent it = new Intent(Intent.ACTION_MAIN);
+            it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            it.addCategory(Intent.CATEGORY_HOME);
+            startActivity(it);
+            Logger.i("执行返回到launcher主页的指令");
+        }
+
+        @Override
+        public void simulateBack() throws RemoteException {
+            Logger.i("simulateBack");
+            Runtime runtime = Runtime.getRuntime();
+            try {
+                runtime.exec("input keyevent " + KeyEvent.KEYCODE_BACK);
+                Logger.i("执行返回键指令完成");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 

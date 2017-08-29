@@ -12,4 +12,7 @@ interface IMainInterface {
             double aDouble, String aString);
 
      int getPID();
+
+     void simulateHome();
+     void simulateBack();
 }
