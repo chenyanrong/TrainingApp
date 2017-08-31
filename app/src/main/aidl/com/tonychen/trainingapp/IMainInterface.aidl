@@ -15,4 +15,7 @@ interface IMainInterface {
 
      void simulateHome();
      void simulateBack();
+     void setData(String data);
+     void deleData();
+     void clearData();
 }

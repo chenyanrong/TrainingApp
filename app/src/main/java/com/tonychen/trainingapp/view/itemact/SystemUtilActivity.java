@@ -19,6 +19,9 @@ public class SystemUtilActivity extends BaseTitleActivity implements View.OnClic
     private ServiceConnection mConn;
     private Button mHome;
     private Button mBack;
+    private Button btn_setData;
+    private Button btn_del;
+    private Button btn_clear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,12 @@ public class SystemUtilActivity extends BaseTitleActivity implements View.OnClic
         mHome.setOnClickListener(this);
         mBack = (Button) findViewById(R.id.btn_back);
         mBack.setOnClickListener(this);
+        btn_setData = (Button) findViewById(R.id.btn_set);
+        btn_setData.setOnClickListener(this);
+        btn_del = (Button) findViewById(R.id.btn_del);
+        btn_del.setOnClickListener(this);
+        btn_clear = (Button) findViewById(R.id.btn_clear);
+        btn_clear.setOnClickListener(this);
     }
 
     @Override
@@ -86,6 +95,42 @@ public class SystemUtilActivity extends BaseTitleActivity implements View.OnClic
                 public void run() {
                     try {
                         iMainInterface.simulateBack();
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, 10000);
+
+        } else if (v == btn_setData) {
+            mMainHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        iMainInterface.setData("0123456789");
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, 10000);
+
+        } else if (v == btn_del) {
+            mMainHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        iMainInterface.deleData();
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, 10000);
+
+        } else if (v == btn_clear) {
+            mMainHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        iMainInterface.clearData();
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }

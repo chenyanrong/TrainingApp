@@ -13,6 +13,7 @@ import com.tonychen.trainingapp.IMainInterface;
 import com.tonychen.trainingapp.config.Attribute;
 import com.tonychen.trainingapp.events.EventOpenDeamonService;
 import com.tonychen.trainingapp.utils.SPUtil;
+import com.tonychen.trainingapp.utils.ShellUtils;
 import com.tonychen.trainingapp.utils.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -155,6 +156,32 @@ public class MainService extends BaseService {
                 e.printStackTrace();
             }
 
+        }
+
+        @Override
+        public void setData(String data) throws RemoteException {
+            Logger.i("setData start");
+            ShellUtils.execCommand("input text 23523434242342424", true);
+            Logger.i("setData end");
+        }
+
+        @Override
+        public void deleData() throws RemoteException {
+            Logger.i("del start");
+            ShellUtils.execCommand("input keyevent 67", true);
+            Logger.i("del end");
+            Intent it = new Intent();
+            it.putExtra("command","append");
+            it.putExtra("value","1234567");
+        }
+
+        @Override
+        public void clearData() throws RemoteException {
+            Logger.i("clear start");
+            for (int i = 0; i < 10; i++) {
+                ShellUtils.execCommand("input keyevent 67", true);
+            }
+            Logger.i("clear end");
         }
     }
 

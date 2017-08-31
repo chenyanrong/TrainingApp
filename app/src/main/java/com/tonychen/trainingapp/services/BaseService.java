@@ -2,9 +2,6 @@ package com.tonychen.trainingapp.services;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.IBinder;
-import android.support.annotation.IntDef;
-import android.support.annotation.Nullable;
 
 import com.orhanobut.logger.Logger;
 
