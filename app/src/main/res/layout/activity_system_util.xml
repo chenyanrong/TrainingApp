@@ -38,4 +38,10 @@
         android:layout_height="wrap_content"
         android:text="cleardata"/>
 
+    <Button
+        android:id="@+id/btn_gettoptask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="getTopTaskInfo"/>
+
 </android.support.v7.widget.LinearLayoutCompat>
